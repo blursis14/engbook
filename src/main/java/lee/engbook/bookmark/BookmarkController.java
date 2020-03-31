@@ -38,7 +38,7 @@ public class BookmarkController {
 	
 	@RequestMapping(value="/bfind/{din}",method=RequestMethod.GET)
 	@ResponseBody
-	public Bookmark find(@PathVariable int din) {
+	public Bookmark find(@PathVariable int din) { //북마크 한개 조회 
 		return service.find(din);
 	}
 }
