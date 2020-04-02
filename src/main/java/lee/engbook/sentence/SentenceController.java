@@ -19,28 +19,23 @@ public class SentenceController {
 	private SentenceService service;
 	
 	@RequestMapping(value="/slist",method=RequestMethod.GET)
-	@ResponseBody
 	public List list() {
 		return service.getList();
 	}
 	
 	@RequestMapping(value="/sadd/{pin}/{sentence}/{mean}/{memo}",method=RequestMethod.GET)
-	@ResponseBody
 	public List add(@PathVariable int pin,@PathVariable String sentence,@PathVariable String mean,@PathVariable String memo){
 		return service.add(pin,sentence,mean,memo);
 	}
 	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
-	@ResponseBody
 	public List delete(@PathVariable int din) {
 		return service.delete(din);
 	}
 	@RequestMapping(value="/sfinddin/{din}",method=RequestMethod.GET)
-	@ResponseBody
 	public Sentence findDin(@PathVariable int din) {
 		return service.findDin(din);
 	}
 	@RequestMapping(value="/sfindpin/{pin}",method=RequestMethod.GET)
-	@ResponseBody
 	public List findPin(@PathVariable int pin) {
 		return service.findPin(pin);
 	}

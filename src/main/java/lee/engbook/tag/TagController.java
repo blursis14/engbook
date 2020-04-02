@@ -19,23 +19,19 @@ public class TagController {
 	private TagService service;
 	
 	@RequestMapping(value="/tlist",method=RequestMethod.GET)
-	@ResponseBody
 	public List list() {
 		return service.getList();
 	}
 	@RequestMapping(value="/tadd/{din}/{tag}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Tag> add(@PathVariable int din,@PathVariable String tag){
 		return service.add(din, tag);
 	}
 	
 	@RequestMapping(value="/tdelete/{din}/{tag}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Tag> delete(@PathVariable int din,@PathVariable String tag){
 		return service.delete(din,tag);
 	}
 	@RequestMapping(value="/tfind/{din}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Tag> find(@PathVariable int din){
 		return service.find(din);
 	}

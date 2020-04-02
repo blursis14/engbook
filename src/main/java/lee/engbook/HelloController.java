@@ -13,4 +13,8 @@ public class HelloController {
 		model.addAttribute("name", "SpringBlog from Millky");
 		return "hello";
 	}
+	@RequestMapping("/ajaxtest")
+	public String main() {
+		return "ajaxtest";
+	}
 }

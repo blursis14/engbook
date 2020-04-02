@@ -19,23 +19,19 @@ public class FolderController {
 	private FolderService service;
 	
 	@RequestMapping(value="/flist",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Folder> list(){
 		return service.getList();
 	}
 	@RequestMapping(value="/ffind/{pin}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Folder> find(@PathVariable int pin){ //특정회원이가진폴더리스트
 		return service.find(pin);
 	}
 	@RequestMapping(value="/fadd/{pin}/{folder}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Folder> add(@PathVariable int pin,@PathVariable String folder){
 		return service.add(pin, folder);
 	}
 	
 	@RequestMapping(value="/fdelete/{pin}/{folder}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Folder> delete(@PathVariable int pin,@PathVariable String folder){ 
 		return service.delete(pin,folder); //삭제 후 특정회원의 폴더리스트 반환
 	}

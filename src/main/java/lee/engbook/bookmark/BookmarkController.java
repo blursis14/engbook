@@ -19,25 +19,21 @@ public class BookmarkController {
 	private BookmarkService service;
 	
 	@RequestMapping(value="/blist",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Bookmark> list(){
 		return service.getList();
 	}
 	
 	@RequestMapping(value="/badd/{pin}/{din}/{folder}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Bookmark> add(@PathVariable int pin, @PathVariable int din,@PathVariable String folder){
 		return service.add(pin, din, folder);
 	}
 	
 	@RequestMapping(value="/bdelete/{din}",method=RequestMethod.GET)
-	@ResponseBody
 	public List<Bookmark> delete(@PathVariable int din){
 		return service.delete(din);
 	}
 	
 	@RequestMapping(value="/bfind/{din}",method=RequestMethod.GET)
-	@ResponseBody
 	public Bookmark find(@PathVariable int din) { //북마크 한개 조회 
 		return service.find(din);
 	}
