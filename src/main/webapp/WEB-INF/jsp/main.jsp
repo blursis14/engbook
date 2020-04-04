@@ -31,11 +31,11 @@ function fire_ajax_submit(){
 	
 	$.ajax({
 		type:"POST",
-		url:"/tfind",
+		url:"/tsearch",
 		dataType:'json',
 		data:search,
 		success:function(data){
-			$('#tagList').html(data[0].tag);
+			$('#tagList').html(data[0].sentence);
 			
 		},
 		error:function(e){

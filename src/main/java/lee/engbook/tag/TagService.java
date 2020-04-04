@@ -1,12 +1,14 @@
 package lee.engbook.tag;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lee.engbook.sentence.Sentence;
+import lee.engbook.sentence.SentenceService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -15,6 +17,9 @@ public class TagService {
 	
 	@Autowired
 	TagRepository repo;
+	
+	@Autowired
+	SentenceService sentence_service;
 	
 	public List getList() {
 		return (List)repo.findAll();
@@ -33,6 +38,15 @@ public class TagService {
 	}
 	public List find(String tag) {
 		return repo.findByTag(tag); //sentence하나당 태그 여러개일 수 있으니까 List반환
+	}
+	public List getSentenceList(List<Tag> tagList) { //tag가 들어간 sentence테이블의 din리스트 반환
+		List<Sentence> sentenceList=new ArrayList<>();
+		for(Tag tag: tagList ) {
+			int din=tag.getDin();
+			sentenceList.add(sentence_service.findDin(din));
+		}
+		return sentenceList;
+		
 	}
 
 }
