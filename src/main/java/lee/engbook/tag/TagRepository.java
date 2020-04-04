@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface TagRepository extends CrudRepository<Tag,Long>{
-	List<Tag> findByDin(int din);
+	List<Tag> findByTag(String tag);
 	Tag findByDinAndTag(int din,String tag);
 
 }

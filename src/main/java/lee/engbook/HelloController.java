@@ -14,7 +14,12 @@ public class HelloController {
 		return "hello";
 	}
 	@RequestMapping("/ajaxtest")
-	public String main() {
+	public String ajaxtest() {
 		return "ajaxtest";
+	}
+	
+	@RequestMapping("/main")
+	public String main() {
+		return "main";
 	}
 }

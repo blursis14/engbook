@@ -31,8 +31,8 @@ public class TagService {
 		repo.delete(tag);
 		return getList();
 	}
-	public List find(int din) {
-		return repo.findByDin(din); //sentence하나당 태그 여러개일 수 있으니까 List반환
+	public List find(String tag) {
+		return repo.findByTag(tag); //sentence하나당 태그 여러개일 수 있으니까 List반환
 	}
 
 }

@@ -32,7 +32,7 @@
     });
  
 </script>
- 
+ <jsp:include page="top.jsp" flush="false"/>
 </head>
 <body>
   <div id="dataArea"></div>
