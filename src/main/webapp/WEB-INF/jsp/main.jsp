@@ -32,10 +32,10 @@ function fire_ajax_submit(){
 	$.ajax({
 		type:"POST",
 		url:"/tfind",
-		dataType:'html',
+		dataType:'json',
 		data:search,
 		success:function(data){
-			$('#tagList').html(data);
+			$('#tagList').html(data[0].tag);
 			
 		},
 		error:function(e){
