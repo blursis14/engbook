@@ -22,4 +22,5 @@ public class HelloController {
 	public String main() {
 		return "main";
 	}
+	
 }
