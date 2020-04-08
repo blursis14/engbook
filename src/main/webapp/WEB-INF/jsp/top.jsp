@@ -30,7 +30,7 @@
 					<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
 				</c:if>
 				<c:if test="${!empty authInfo }">
-					<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 				</c:if>
 				<li class="nav-item dropdown">
 					 <a class="nav-link dropdown-toggle" href="#"

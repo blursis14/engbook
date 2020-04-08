@@ -26,10 +26,7 @@ public class MemberController {
 		return service.getList();
 	}
 	
-	@RequestMapping(value="/madd/{id}/{password}/{email}/{regType}",method=RequestMethod.GET)
-	public List<Member> add(@PathVariable String id,@PathVariable String password,@PathVariable String email,@PathVariable String regType){
-		return service.add(id, password, email, regType);
-	}
+	
 	@RequestMapping(value="/mdelete/{id}",method=RequestMethod.GET)
 	public List<Member> delete(@PathVariable String id){
 		return service.delete(id);
