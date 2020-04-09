@@ -16,6 +16,7 @@
 	<button class="btn btn-success" type="submit">확인</button>
 </form>
 </div>
+<div>${exception}</div>
 <div>
 <a href="/register/form" class="btn btn-outline-info mt-3 ml-1" role="button">회원가입</a>
 </div>
