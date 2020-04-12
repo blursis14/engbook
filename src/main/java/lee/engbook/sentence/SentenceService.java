@@ -19,15 +19,17 @@ public class SentenceService {
 	public List getList() {
 		return (List)repo.findAll();
 	}
-	public List add(int pin,String p_sentence,String mean,String memo) {
+	
+	public Sentence add(int pin,String p_sentence,String mean,String memo) {
 		Sentence sentence=new Sentence();
 		sentence.setPin(pin);
 		sentence.setSentence(p_sentence); //인스턴스랑 이름 겹치니까 파라미터인 센텐스는 p_sentence로 명명 
 		sentence.setMean(mean);
 		sentence.setMemo(memo);
 		sentence.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
-		repo.save(sentence);
-		return getList();
+		sentence=repo.save(sentence);
+		
+		return sentence; //sentence의 자동생성된 din값이, 다른 테이블에 값저장할 때 필요하므로 새로 저장된거 반환
 	}
 	public List delete(int din) {
 		Sentence sentence=repo.findByDin(din);

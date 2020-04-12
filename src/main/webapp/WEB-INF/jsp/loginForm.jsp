@@ -9,16 +9,18 @@
 <jsp:include page="top.jsp" flush="false"/>
 </head>
 <body>
-<div class="mt-3 ml-1">
+<div class="container-fluid center-block" style="width: 1000px; padding: 15px;">
 <form class="form-inline ml-auto" method="post">
 	<input class="form-control mr-sm-2" type="text" name="id" id="id" placeholder="아이디"/><br/>
 	<input class="form-control mr-sm-2" type="text" name="password" id="password" placeholder="비밀번호"/></br/>
 	<button class="btn btn-success" type="submit">확인</button>
 </form>
-</div>
+
 <div>${exception}</div>
 <div>
 <a href="/register/form" class="btn btn-outline-info mt-3 ml-1" role="button">회원가입</a>
+</div>
+
 </div>
 </body>
 </html>

@@ -37,7 +37,7 @@ public class TagController {
 		return service.delete(din,tag);
 	}
 	@PostMapping("/tsearch")
-	public ResponseEntity<?> search(@RequestParam(value="tag", defaultValue="") String tag){
+	public ResponseEntity<?> search(@RequestParam(value="search-tag", defaultValue="") String tag){
 		System.out.println(tag);
 		List<Tag> tagList= service.find(tag);//사용자가 검색한 태그가 들어간 태그객체리스트 반환
 		List<Sentence> sentenceList=service.getSentenceList(tagList); //태그리스트 보고 태그에있는 din들어간 sentence리스트 얻기

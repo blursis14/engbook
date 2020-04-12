@@ -49,5 +49,9 @@ public class MemberService {
 	public Member find(String id) {
 		return repo.findById(id);
 	}
+	public int findPin(String id) {
+		Member member=repo.findById(id);
+		return member.getPin();
+	}
 	
 }
