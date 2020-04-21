@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 
 
 <script type="text/javascript">
+//검색 에이젝스 테스트
 	$(function() {
 		$("#search").submit(function(event) {
 			event.preventDefault();
@@ -17,7 +19,6 @@
 		});
 	});
 
-	
 	function fire_ajax_submit() {
 
 		var search = $("form[name=search]").serialize();
@@ -39,7 +40,7 @@
 	}
 	
 	
-
+//추가잘되었을때
 	$(function(){
 		$("#sentence-form").submit(function () {
 			  if ($(document.activeElement).attr('type') == 'submit'){
@@ -69,7 +70,7 @@
 
 	
 	
-
+//추가버튼눌렀을때 회원 폴더가져오는거
 	$(function() {
 		$("#addSentence").click(function(event) {
 			console.log("추가버튼 클릭이벤트 실행"); 
@@ -105,6 +106,10 @@
 	
 	
 	
+	//무한스크롤 소스
+	
+	
+	
 </script>
 
 
@@ -121,9 +126,18 @@
 					placeholder="단어 검색" name="search-tag" id="search-tag" />
 				<button class="btn btn-success" id="btn" type="submit">검색</button>
 			</form>
-			<button type="button" id="addSentence"
+			<c:if test="${!empty authInfo }"> <!-- 로그인해야 추가할수있게 -->
+			<!-- <button type="button" id="addSentence"
 				class="btn btn-outline-info ml-2" data-toggle="modal"
-				data-target="#addSentenceModal">추가</button>
+				data-target="#addSentenceModal">추가</button> -->
+				
+			<a class="btn btn-outline-info ml-2" role="button" id="addSentence"
+				data-toggle="modal" data-target="#addSentenceModal">추가</a>
+			</c:if>
+			
+			<c:if test="${empty authInfo }">
+			<a class="btn btn-outline-info ml-2" href="needLogin" role="button" >추가</a>
+			</c:if>
 			<!-- 모달버튼 -->
 
 			<!-- 모달 영역 -->
@@ -136,6 +150,10 @@
 							<h4 class="modal-title" id="myModalLabel">문장 추가</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
+							
+							
+							
+								
 								<span aria-hidden="true">×</span>
 							</button>
 						</div>
@@ -175,10 +193,29 @@
 				</div>
 			</div>
 		</div>
-
-		<!--  <div class="card">
-				<div id="tagList" class="card-body"></div>
-			</div>-->
+		
+		
+		
+<div class="container-fluid center-block" style="width: 1000px; padding: 15px;">
+	<div class="row">
+	<div class="col-sm">
+	<ul class="list-group">
+		<li class="list-group-item">문장</li>
+		<li class="list-group-item">뜻</li>
+		<li class="list-group-item">메모</li>
+		<li class="list-group-item">태그</li>
+		<li class="list-group-item">등록일</li>
+		<ul class="list-group list-group-horizontal">
+		<button class="list-group-item list-group-item-action">수정</button>
+		<button class="list-group-item list-group-item-action">삭제</button>
+		</ul>
+		</ul></div>
+		
+		
+		
+	</div>
+	</div>
+		
 
 	</div>
 	</div>

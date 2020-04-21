@@ -26,6 +26,7 @@ public class LoginController {
 		try {
 			AuthInfo authInfo=authService.authenticate(request.getParameter("id"), request.getParameter("password"));
 			session.setAttribute("authInfo", authInfo);
+			model.addAttribute("exception", "");
 			return "main";
 		}catch(WrongIdPasswordException e) {
 			model.addAttribute("exception", "존재하지 않는 아이디거나,아이디와 비밀번호가 일치하지 않습니다.");

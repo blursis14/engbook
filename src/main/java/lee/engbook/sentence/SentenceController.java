@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,10 +38,10 @@ public class SentenceController {
 	@Autowired
 	private BookmarkService bookmarkService;
 	
-	@RequestMapping(value="/slist",method=RequestMethod.GET)
+	/**@RequestMapping(value="/slist",method=RequestMethod.GET)
 	public List list() {
 		return service.getList();
-	}
+	}**/
 	
 	@PostMapping("/sadd")
 	public void add(SentenceForm sentenceForm,HttpSession session){
@@ -49,7 +50,6 @@ public class SentenceController {
 		int pin =memberService.findPin(authInfo.getId()); 
 		Sentence newSentence=service.add(pin,sentenceForm.getSentence(), sentenceForm.getMean(),sentenceForm.getMemo());
 		tagService.add(newSentence.getDin(),sentenceForm.getTag()); 
-		folderService.add(pin, sentenceForm.getFolder());
 		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder());
 	}
 	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
@@ -64,5 +64,36 @@ public class SentenceController {
 	public List findPin(@PathVariable int pin) {
 		return service.findPin(pin);
 	}
+	
+	@GetMapping("/list/sentence")
+	public List<Sentence> list(int page,int size){
+		List<Sentence> sentenceList= service.findSentenceByPageable(page,size);
+		return sentenceList;
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

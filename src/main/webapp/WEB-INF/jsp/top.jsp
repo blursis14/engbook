@@ -21,36 +21,26 @@
 		<nav class="navbar navbar-expand-sm navbar-light"
 			style="background-color: #91cfff;">
 
-			<a class="navbar-brand" href="#">Navbar</a>
 
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#collapsibleNavbar">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<div id="member">
 				<ul class="navbar-nav navbar-dark">
 					<c:if test="${empty authInfo }">
 						<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="/needLogin">북마크</a></li>
 					</c:if>
 					<c:if test="${!empty authInfo }">
 						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" href="/bookmark">북마크</a></li>
 					</c:if>
-
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-							Dropdown </a>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Link 1</a> <a
-								class="dropdown-item" href="#">Link 2</a> <a
-								class="dropdown-item" href="#">Link 3</a>
-						</div></li>
+					
+						
 				</ul>
+				
 			</div>
 		</nav>
 	</div>
-	
-		
+
+
 
 </body>
 </html>

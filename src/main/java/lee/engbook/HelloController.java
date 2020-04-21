@@ -19,11 +19,20 @@ public class HelloController {
 	}
 	
 	@RequestMapping("/main")
-	public String main() {
+	public String main(Model model) {
+		//model.addAttribute("firstData",)
 		return "main";
 	}
 	
+	@RequestMapping("/needLogin")  
+	public String needLogin(Model model) {
+		model.addAttribute("exception", "로그인이 필요한 서비스입니다.");
+		return "loginForm";
+	}
 	
-	
+	@RequestMapping("/bookmark")
+	public String bookmark() {
+		return "bookmark";
+	}
 	
 }
