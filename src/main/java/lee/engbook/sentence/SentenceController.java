@@ -1,13 +1,14 @@
 package lee.engbook.sentence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,9 +66,16 @@ public class SentenceController {
 		return service.findPin(pin);
 	}
 	
-	@GetMapping("/list/sentence")
-	public List<Sentence> list(int page,int size){
+	@PostMapping("/list/sentence")
+	public List<Sentence> list(@RequestBody HashMap<String,Object> param){
+		
+		int page=(int)param.get("page");
+		int size=(int)param.get("size");
+		System.out.println(page);
+		System.out.println(size);
+		
 		List<Sentence> sentenceList= service.findSentenceByPageable(page,size);
+		
 		return sentenceList;
 	}
 	
