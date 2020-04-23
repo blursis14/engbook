@@ -56,6 +56,16 @@ public class TagService {
 		return sentenceList;
 	}
 	
+	public String findTagByDin(int din) { //din하나에 해당하는 태그들 찾아서,이어붙여서 리턴
+		List<Tag> tagList=new ArrayList<>();
+		tagList=repo.findByDin(din);
+		String tags= "";
+		for(Tag tag:tagList) {
+			tags+=(" "+tag.getTag());
+		}
+		return tags;
+	}
+	
 
 
 }

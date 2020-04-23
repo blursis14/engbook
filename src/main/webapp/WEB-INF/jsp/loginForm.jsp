@@ -12,7 +12,7 @@
 <div class="container-fluid center-block" style="width: 1000px; padding: 15px;">
 <form class="form-inline ml-auto" method="post" action="login">
 	<input class="form-control mr-sm-2" type="text" name="id" id="id" placeholder="아이디"/><br/>
-	<input class="form-control mr-sm-2" type="text" name="password" id="password" placeholder="비밀번호"/></br/>
+	<input class="form-control mr-sm-2" type="password" name="password" id="password" placeholder="비밀번호"/></br/>
 	<button class="btn btn-success" type="submit">확인</button>
 </form>
 

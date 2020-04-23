@@ -139,15 +139,16 @@
 	         contentType:"application/json; charset=UTF-8",
 	         success:function(data){
 	        	 
-	        	 //alert(data[0].sentence);
-	        	 
 	        	 $.each(data,function(key,value){
 	        		 var $ul = $('<ul class="list-group mb-3">')
-                     .append($('<li class="list-group-item">').text(value.sentence))
-                     .append($('<li class="list-group-item">').text(value.mean))
-                     .append($('<li class="list-group-item">').text(value.memo))
-                     .append($('<li class="list-group-item">').text(value.regDate));
-                     //.append($('<li class="list-group-item">').text(value.tag));                  
+                     .append($('<li class="list-group-item">').text(value.sentence.sentence))
+                     .append($('<li class="list-group-item">').text(value.sentence.mean))
+                     .append($('<li class="list-group-item">').text(value.sentence.memo))
+                     .append($('<li class="list-group-item">').text(value.tag))
+                     .append($('<li class="list-group-item">').text(value.sentence.regDate))
+                     .append($('<ul class="list-group list-group-horizontal">')
+                    		 .append($('<button class="list-group-item list-group-item-primary">').text('수정'))
+                    		 .append($('<button class="list-group-item list-group-item-success">').text('삭제')));
      
      // 부모 엘리먼트에 append
      $('#cardList').append($ul);
@@ -254,17 +255,7 @@
 				style="width: 1000px; padding: 15px;">
 				<div class="row">
 					<div class="col-sm" id="cardList">
-						<ul class="list-group">
-							<li class="list-group-item">문장</li>
-							<li class="list-group-item">뜻</li>
-							<li class="list-group-item">메모</li>
-							<li class="list-group-item">태그</li>
-							<li class="list-group-item">등록일</li>
-							<ul class="list-group list-group-horizontal">
-								<button class="list-group-item list-group-item-action">수정</button>
-								<button class="list-group-item list-group-item-action">삭제</button>
-							</ul>
-						</ul>
+						
 					</div>
 
 

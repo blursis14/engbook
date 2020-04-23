@@ -11,7 +11,8 @@
 <jsp:include page="../top.jsp" flush="false" />
 </head>
 <body>
-	<div class="mt-3 ml-1">
+	<div class="container-fluid center-block"
+		style="width: 1000px; padding: 15px;">
 		<form:form modelAttribute="registerRequest" method="post"
 			id="register">
 			<p>

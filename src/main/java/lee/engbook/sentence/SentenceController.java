@@ -1,5 +1,6 @@
 package lee.engbook.sentence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lee.engbook.AuthInfo;
+import lee.engbook.SentenceListForm;
 import lee.engbook.bookmark.BookmarkService;
 import lee.engbook.folder.FolderService;
 import lee.engbook.member.MemberService;
@@ -67,16 +69,24 @@ public class SentenceController {
 	}
 	
 	@PostMapping("/list/sentence")
-	public List<Sentence> list(@RequestBody HashMap<String,Object> param){
+	public List<SentenceListForm> list(@RequestBody HashMap<String,Object> param){
 		
 		int page=(int)param.get("page");
 		int size=(int)param.get("size");
-		System.out.println(page);
-		System.out.println(size);
+		
 		
 		List<Sentence> sentenceList= service.findSentenceByPageable(page,size);
+		List<SentenceListForm> sentenceListForm=new ArrayList<>();
+		String tag;
+		for(Sentence sentence:sentenceList) {
+			tag=tagService.findTagByDin(sentence.getDin());
+			SentenceListForm slf=new SentenceListForm();
+			slf.setSentence(sentence);
+			slf.setTag(tag);
+			sentenceListForm.add(slf); //(sentenceListForm:센텐스객체+한줄화된 태그)객체들의 리스트를 메인에 보냄 
+		}
 		
-		return sentenceList;
+		return sentenceListForm;
 	}
 	
 

@@ -8,5 +8,5 @@ import lombok.Data;
 public class SentenceListForm {
 
 	private Sentence sentence;
-	private Tag tag;
+	private String tag;
 }
