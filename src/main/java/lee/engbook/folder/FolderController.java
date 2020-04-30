@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lee.engbook.AuthInfo;
@@ -33,9 +35,13 @@ public class FolderController {
 		int pin =memberService.findPin(authInfo.getId()); //회원고유번호알아내기
 		return service.find(pin);
 	}
-	@RequestMapping(value="/fadd/{pin}/{folder}",method=RequestMethod.GET)
-	public List<Folder> add(@PathVariable int pin,@PathVariable String folder){
-		return service.add(pin, folder);
+	@PostMapping("/fadd")
+	public void add(@RequestParam(value="newFolder",defaultValue="")String newFolder,HttpSession session){
+		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
+		System.out.println(newFolder);
+		int pin=memberService.findPin(authInfo.getId());
+		
+		service.add(pin, newFolder);
 	}
 	
 	@RequestMapping(value="/fdelete/{pin}/{folder}",method=RequestMethod.GET)
@@ -43,3 +49,33 @@ public class FolderController {
 		return service.delete(pin,folder); //삭제 후 특정회원의 폴더리스트 반환
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -40,11 +40,11 @@
 	}
 	
 	
-//추가잘되었을때
+//문장추가
 	$(function(){
 		$("#sentence-form").submit(function () {
 			  if ($(document.activeElement).attr('type') == 'submit'){
-				  alert("추가되었습니다");
+				  
 				  
 				  var sentenceForm=$("form[name=sentence-form]").serialize();
 				  
@@ -203,8 +203,6 @@
 							<h4 class="modal-title" id="myModalLabel">문장 추가</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
-
-
 
 
 								<span aria-hidden="true">×</span>

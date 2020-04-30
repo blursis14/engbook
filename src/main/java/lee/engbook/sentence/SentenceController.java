@@ -53,7 +53,7 @@ public class SentenceController {
 		int pin =memberService.findPin(authInfo.getId()); 
 		Sentence newSentence=service.add(pin,sentenceForm.getSentence(), sentenceForm.getMean(),sentenceForm.getMemo());
 		tagService.add(newSentence.getDin(),sentenceForm.getTag()); 
-		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder());
+		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+오픈사전 격인 센텐스DB에 등록
 	}
 	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
 	public List delete(@PathVariable int din) {
