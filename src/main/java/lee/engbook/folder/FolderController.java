@@ -36,13 +36,14 @@ public class FolderController {
 		return service.find(pin);
 	}
 	@RequestMapping(value="/fadd",method=RequestMethod.POST)
-	public String add(@RequestParam(value="newFolder",defaultValue="")String newFolder,HttpSession session){
+	public Folder add(@RequestParam(value="newFolder",defaultValue="")String newFolder,HttpSession session){
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
 		System.out.println(newFolder);
 		int pin=memberService.findPin(authInfo.getId());
-	
-		 service.add(pin, newFolder);
-		 return newFolder;
+		Folder result=new Folder();
+		result=service.add(pin, newFolder); //새폴더객체반환
+		return result;
+		
 	
 		
 	}

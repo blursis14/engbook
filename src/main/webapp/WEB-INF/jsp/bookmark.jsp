@@ -26,11 +26,8 @@ $(function(){
 				data:newFolder,
 				success:function(data){
 					alert("success 호출됨");
-					
-					alert(data);
+					alert((JSON.parse(data)).folder);
 				
-					//var btn=$("<button class="btn btn-outline-info mb-1">"+data.folder+"</button>");
-					//$('#folder-list').prepend(btn);
 				},
 				error:function(e){
 					alert('실패');
