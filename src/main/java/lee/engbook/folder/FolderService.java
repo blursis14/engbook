@@ -26,7 +26,7 @@ public class FolderService {
 	}
 	
 	public List delete(int pin,String folderName) {
-		Folder folder=repo.findByPinAndFolder(pin, folderName);
+		Folder folder=repo.findByPinAndFolder(pin, folderName); //폴더삭제
 		repo.delete(folder);
 		return find(pin);
 	}

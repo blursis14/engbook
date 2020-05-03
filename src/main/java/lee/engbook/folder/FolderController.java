@@ -44,7 +44,6 @@ public class FolderController {
 		result=service.add(pin, newFolder); //새폴더객체반환
 		return result;
 		
-	
 		
 	}
 	

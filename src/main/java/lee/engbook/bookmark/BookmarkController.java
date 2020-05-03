@@ -1,58 +1,55 @@
 package lee.engbook.bookmark;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import lombok.extern.slf4j.Slf4j;
+import lee.engbook.AuthInfo;
+import lee.engbook.folder.FolderService;
+import lee.engbook.member.MemberService;
 
-@Slf4j
-@RestController
+@Controller
 public class BookmarkController {
+	
+	@Autowired
+	BookmarkService service;
+	@Autowired
+	MemberService memberService;
 
 	@Autowired
-	private BookmarkService service;
+	FolderService folderService;
 	
-	@RequestMapping(value="/blist",method=RequestMethod.GET)
-	public List<Bookmark> list(){
-		return service.getList();
+	
+
+	@RequestMapping("/bookmark")
+	public ModelAndView bookmarkFolder(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo"); // 로그인정보 얻기
+
+		int pin = memberService.findPin(authInfo.getId()); // 사용자의 pin정보 찾기
+
+		mav.addObject("folders", folderService.find(pin)); // 사용자의 폴더리스트 저장
+
+		mav.setViewName("bookmark/folder"); // 북마크/폴더로 뷰 경로 지정
+		return mav;
 	}
-	
-	@RequestMapping(value="/badd/{pin}/{din}/{folder}",method=RequestMethod.GET)
-	public List<Bookmark> add(@PathVariable int pin, @PathVariable int din,@PathVariable String folder){
-		return service.add(pin, din, folder);
-	}
-	
-	@RequestMapping(value="/bdelete/{din}",method=RequestMethod.GET)
-	public List<Bookmark> delete(@PathVariable int din){
-		return service.delete(din);
-	}
-	
-	@RequestMapping(value="/bfind/{din}",method=RequestMethod.GET)
-	public Bookmark find(@PathVariable int din) { //북마크 한개 조회 
-		return service.find(din);
+
+	@RequestMapping("/bookmark/{folder}")
+	public ModelAndView bookmarkList(@PathVariable String folder,HttpSession session) {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo"); 
+
+		int pin = memberService.findPin(authInfo.getId()); //사용자의 pin 찾기
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("bookmarks",service.getListOfFolder(pin,folder)); //회원이 폴더에 저장한 북마크 리스트(실제론 sentence객체의 리스트임) 저장
+		mav.setViewName("bookmark/list"); //북마크/리스트로 뷰 경로 지정
+		
+		return mav;
+		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

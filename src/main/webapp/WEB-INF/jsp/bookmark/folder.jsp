@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>bookmark</title>
 <script type="text/javascript" src="webjars/jquery/3.3.1/jquery.min.js"></script>
-<jsp:include page="top.jsp" flush="false" />
+<jsp:include page="../top.jsp" flush="false" />
 
 <script type="text/javascript">
 
@@ -65,8 +65,10 @@ $(function(){
 				<div class="col-sm">
 					<ul class="list-group" id="folder-list">
 
-						<c:forEach var="folders" items="${folders}">
-							<button class="btn btn-outline-info mb-1">${folders.folder }</button>
+						<c:forEach var="folder" items="${folders}">
+							<a class="btn btn-outline-info mb-1" role="button" 
+								href="/bookmark/${folder.folder }">
+								${folder.folder }</a>
 						</c:forEach>
 						<a class="btn btn-outline-primary mb-1" role="button" id="addFolder"
 							data-toggle="modal" data-target="#addFolderModal">새폴더</a>
