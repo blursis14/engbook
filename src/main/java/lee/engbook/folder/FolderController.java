@@ -5,8 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,13 +35,16 @@ public class FolderController {
 		int pin =memberService.findPin(authInfo.getId()); //회원고유번호알아내기
 		return service.find(pin);
 	}
-	@PostMapping("/fadd")
-	public void add(@RequestParam(value="newFolder",defaultValue="")String newFolder,HttpSession session){
+	@RequestMapping(value="/fadd",method=RequestMethod.POST)
+	public String add(@RequestParam(value="newFolder",defaultValue="")String newFolder,HttpSession session){
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
 		System.out.println(newFolder);
 		int pin=memberService.findPin(authInfo.getId());
+	
+		 service.add(pin, newFolder);
+		 return newFolder;
+	
 		
-		service.add(pin, newFolder);
 	}
 	
 	@RequestMapping(value="/fdelete/{pin}/{folder}",method=RequestMethod.GET)

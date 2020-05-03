@@ -41,10 +41,6 @@ public class SentenceController {
 	@Autowired
 	private BookmarkService bookmarkService;
 	
-	/**@RequestMapping(value="/slist",method=RequestMethod.GET)
-	public List list() {
-		return service.getList();
-	}**/
 	
 	@PostMapping("/sadd")
 	public void add(SentenceForm sentenceForm,HttpSession session){

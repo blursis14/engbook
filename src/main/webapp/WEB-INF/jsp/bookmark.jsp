@@ -17,28 +17,37 @@ $(function(){
 		if($(document.activeElement).attr('type')=='submit'){
 			
 			var newFolder=$("form[name=folder-form]").serialize();
-		
 			
 			$.ajax({
 				type:"POST",
 				url:"/fadd",
+				async:false,
+				dataType:'text',
 				data:newFolder,
-				success:function(){
-					alert('추가했습니다');
+				success:function(data){
+					alert("success 호출됨");
+					
+					alert(data);
+				
+					//var btn=$("<button class="btn btn-outline-info mb-1">"+data.folder+"</button>");
+					//$('#folder-list').prepend(btn);
 				},
 				error:function(e){
 					alert('실패');
 				}
 				
-			
 			})
+			
 		}
 		else{
 			alert("엔터말고 추가버튼을 누르세요");
 			event.preventDefault();
 		}
+		
 	});
 });
+
+
 
 
 
@@ -57,7 +66,7 @@ $(function(){
 		<c:if test="${!empty folders }">
 			<div class="row">
 				<div class="col-sm">
-					<ul class="list-group">
+					<ul class="list-group" id="folder-list">
 
 						<c:forEach var="folders" items="${folders}">
 							<button class="btn btn-outline-info mb-1">${folders.folder }</button>
@@ -85,7 +94,7 @@ $(function(){
 			<span aria-hidden="true">x</span>
 			</button></div>
 			<div class="modal-body">
-				<form id="folder-form" name="folder-form">
+				<form id="folder-form" name="folder-form" action="bookmark" >
 					<div class="form-group">
 						
 						<input class="form-control" id="newFolder" name="newFolder"

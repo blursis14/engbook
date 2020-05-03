@@ -53,7 +53,7 @@
 					  url:"/sadd",
 					  data:sentenceForm,
 					  success:function(){
-						  alert('추가성공');
+						
 					  },
 					  error:function(e){
 						  alert('실패');
@@ -80,6 +80,7 @@
 				url:"/ffind",
 				dataType:"json",
 				success:function(data){
+					alert(data[0].folder);
 					$.each(data,function(key,value){
 						var addContent=$("<option>"+value.folder+"</option>"); //회원이 가진 폴더들 보여줌
 						$("#folder-select").append(addContent);

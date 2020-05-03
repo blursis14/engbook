@@ -17,12 +17,12 @@ public class FolderService {
 	public List getList() {
 		return (List)repo.findAll();
 	}
-	public List add(int pin,String folderName) { //인스턴스folder랑 파라미터folder(폴더이름)헷갈릴까봐 파라미터는 folderName으로 정함 
+	public Folder add(int pin,String folderName) { //인스턴스folder랑 파라미터folder(폴더이름)헷갈릴까봐 파라미터는 folderName으로 정함 
 		Folder folder=new Folder();
 		folder.setPin(pin);
 		folder.setFolder(folderName);
-		repo.save(folder);
-		return getList();
+		return repo.save(folder);
+		
 	}
 	
 	public List delete(int pin,String folderName) {
