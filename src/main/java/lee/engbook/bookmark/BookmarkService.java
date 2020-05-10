@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lee.engbook.sentence.Sentence;
+import lee.engbook.sentence.SentenceListForm;
 import lee.engbook.sentence.SentenceService;
+import lee.engbook.tag.TagService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,6 +23,9 @@ public class BookmarkService {
 	
 	@Autowired
 	SentenceService sentenceService;
+	
+	@Autowired
+	TagService tagService;
 	
 	public List getList() {
 		return (List) repo.findAll();
@@ -36,24 +41,32 @@ public class BookmarkService {
 		return getList();
 	}
 	
-	public List delete(int din) {
-		Bookmark bookmark=repo.findByDin(din); //어떤북마크삭제할건지알아보고
-		repo.delete(bookmark);//삭제
-		return getList();
+	public void delete(int pin,int din) {
+		Bookmark bookmark=repo.findByPinAndDin(pin,din); //어떤북마크삭제할건지 알아내고
+		
+		repo.delete(bookmark); //삭제
 	}
 	
 	
 	
-	public List<Sentence> getListOfFolder(int pin,String folder) {
+	public List<SentenceListForm> getListOfFolder(int pin,String folder) {
 		List<Bookmark> bookmarkList=new ArrayList<>();
 		bookmarkList=repo.findByPinAndFolder(pin,folder); //북마크리스트 찾기
+		//System.out.println(bookmarkList);
+		List<SentenceListForm> sentenceListForm=new ArrayList<>();
 		
-		List<Sentence> sentenceList=new ArrayList<>();
 		
 		for(Bookmark bookmark:bookmarkList) {
-			sentenceList.add(sentenceService.findDin(bookmark.getDin()));
+			//System.out.println(bookmark.getDin());
+			Sentence sentence=sentenceService.findDin(bookmark.getDin());
+			sentence.setRegDate(bookmark.getRegDate()); //자기가 등록한거면 등록일이 같겠지만 남이 쓴 걸 북마크로 추가했을 때는 북마크에 있는 등록일이 진짜 등록일임
+			SentenceListForm slf=new SentenceListForm();
+			slf.setSentence(sentence);
+			slf.setTag(tagService.findTagByDin(bookmark.getDin()));
+			sentenceListForm.add(slf);
 		} //북마크의 din정보를 이용해 sentence리스트들을 만들기
-		return sentenceList; 
+		
+		return sentenceListForm; 
 	}
 
 }

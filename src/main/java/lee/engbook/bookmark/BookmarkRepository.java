@@ -10,5 +10,7 @@ public interface BookmarkRepository extends CrudRepository<Bookmark,Long> {
 	
 	List<Bookmark> findByPinAndFolder(int pin,String folder); //회원의 특정폴더 들어가면 북마크 리스트 반환
 	
+	Bookmark findByPinAndDin(int pin,int din); //삭제 할 때 회원pin과 문서din으로 찾아봄
+	
 
 }

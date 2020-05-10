@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lee.engbook.AuthInfo;
-import lee.engbook.SentenceListForm;
 import lee.engbook.bookmark.BookmarkService;
 import lee.engbook.folder.FolderService;
 import lee.engbook.member.MemberService;

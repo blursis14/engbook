@@ -70,7 +70,7 @@
 
 	
 	
-//추가버튼눌렀을때 회원 폴더가져오는거
+//추가버튼눌렀을때 폴더목록 가져오는거
 	$(function() {
 		$("#addSentence").click(function(event) {
 			console.log("추가버튼 클릭이벤트 실행"); 

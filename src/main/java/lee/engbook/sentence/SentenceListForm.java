@@ -1,6 +1,5 @@
-package lee.engbook;
+package lee.engbook.sentence;
 
-import lee.engbook.sentence.Sentence;
 import lee.engbook.tag.Tag;
 import lombok.Data;
 
