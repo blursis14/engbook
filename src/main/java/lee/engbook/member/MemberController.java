@@ -34,7 +34,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/mfind/{id}",method=RequestMethod.GET)
 	public Member find(@PathVariable String id) {
-		return service.find(id);
+		return service.findById(id);
 	}
 	
 

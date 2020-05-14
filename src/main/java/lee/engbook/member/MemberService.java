@@ -1,11 +1,13 @@
 package lee.engbook.member;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lee.engbook.DuplicateMemberException;
 import lee.engbook.RegisterRequest;
@@ -26,12 +28,14 @@ public class MemberService {
 		return (List)repo.findAll();
 	}
 	
+	
 	public List regist(RegisterRequest regReq) {
 		Member member=repo.findById(regReq.getId());
 		if(member!=null) {
-			throw new DuplicateMemberException("duplicate email"+regReq.getEmail());
-		}
-		if(!regReq.isPasswordEqualToConfirmPassword()) {
+			System.out.println("duplicateMember");
+			throw new DuplicateMemberException("duplicate id or email"+regReq.getId()+regReq.getEmail());
+		} //id랑 email은 커스텀 validator 만들었으니까 이건 빼도 될 듯 
+		if(!regReq.isPasswordEqualToConfirmPassword()) {//비번불일치
 			throw new WrongIdPasswordException();
 		}
 		Member newMember=new Member();
@@ -51,8 +55,11 @@ public class MemberService {
 		repo.delete(member);
 		return getList();
 	}
-	public Member find(String id) {
+	public Member findById(String id) {
 		return repo.findById(id);
+	}
+	public Member findByEmail(String email) {
+		return repo.findByEmail(email);
 	}
 	public int findPin(String id) {
 		Member member=repo.findById(id);

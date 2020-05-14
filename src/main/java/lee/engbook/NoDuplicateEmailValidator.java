@@ -8,17 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lee.engbook.member.Member;
 import lee.engbook.member.MemberService;
 
-public class NoDuplicateIdValidator implements ConstraintValidator<NoDuplicateIdValid, String> {
-
+public class NoDuplicateEmailValidator implements ConstraintValidator<NoDuplicateEmailValid, String>{
 	@Autowired
 	private MemberService memberService;
 	
 	@Override
-	public void initialize(NoDuplicateIdValid constraintAnnotation) {}
+	public void initialize(NoDuplicateEmailValid constraintAnnotation) {}
 	
 	@Override
 	public boolean isValid(String value,ConstraintValidatorContext context) {
-		Member member=memberService.findById(value);
+		Member member=memberService.findByEmail(value);
 		if(member==null)
 			return true;
 		else

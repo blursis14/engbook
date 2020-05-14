@@ -56,7 +56,7 @@ public class BookmarkRestController {
 		System.out.println(din);
 		int pin=memberService.findPin(authInfo.getId()); 
 
-		service.deleteOne(pin,din); //자기 북마크에서만 삭제 //잠ㅁ만!!!!!!!!!!!!이거호출하면다른사람북마크도 지워지니까 자기북마크만지워지도록 수정해야됨!!!!!!!!!
+		service.deleteOne(pin,din); //자기 북마크에서만 삭제 
 	}
 	
 	

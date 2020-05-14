@@ -17,6 +17,7 @@ public class RegisterRequest {
 	
 	@NotBlank(message="필수항목입니다.")
 	@Email(message="이메일 형식이 올바르지 않습니다.")
+	@NoDuplicateEmailValid
 	private String email;
 	
 	@NotBlank(message="필수항목입니다.")
