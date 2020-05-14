@@ -80,7 +80,7 @@
 				url:"/ffind",
 				dataType:"json",
 				success:function(data){
-					alert(data[0].folder);
+					//alert(data[0].folder);
 					$.each(data,function(key,value){
 						var addContent=$("<option>"+value.folder+"</option>"); //회원이 가진 폴더들 보여줌
 						$("#folder-select").append(addContent);

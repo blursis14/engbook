@@ -34,10 +34,10 @@ public class SentenceService {
 		
 		return sentence; //sentence의 자동생성된 din값이, 다른 테이블에 값저장할 때 필요하므로 새로 저장된거 반환
 	}
-	public List delete(int din) {
+	public void delete(int din) {
 		Sentence sentence=repo.findByDin(din);
 		repo.delete(sentence);
-		return getList();
+		
 	}
 	public Sentence findDin(int din) {
 		return repo.findByDin(din); 

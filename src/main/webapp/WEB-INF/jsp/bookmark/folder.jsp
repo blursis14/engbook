@@ -60,7 +60,7 @@ $(function(){
 	<div class="container-fluid center-block"
 		style="width: 1000px; padding: 15px;">
 
-		<c:if test="${!empty folders }">
+		
 			<div class="row">
 				<div class="col-sm">
 					<ul class="list-group" id="folder-list">
@@ -70,14 +70,15 @@ $(function(){
 								href="/bookmark/${folder.folder }">
 								${folder.folder }</a>
 						</c:forEach>
+		
 						<a class="btn btn-outline-primary mb-1" role="button" id="addFolder"
-							data-toggle="modal" data-target="#addFolderModal">새폴더</a>
-						<button class="btn btn-outline-warning">archive</button>
+							data-toggle="modal" data-target="#addFolderModal">폴더 추가</a>
+						
 						
 					</ul>
 				</div>
 			</div>
-		</c:if>
+	
 
 
 

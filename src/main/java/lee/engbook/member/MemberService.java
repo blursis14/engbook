@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lee.engbook.DuplicateMemberException;
 import lee.engbook.RegisterRequest;
 import lee.engbook.WrongIdPasswordException;
+import lee.engbook.folder.FolderService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,7 +19,8 @@ public class MemberService {
 
 	@Autowired
 	MemberRepository repo;
-	
+	@Autowired
+	FolderService folderService;
 	
 	public List getList() {
 		return (List)repo.findAll();
@@ -38,7 +40,10 @@ public class MemberService {
 		newMember.setEmail(regReq.getEmail());
 		newMember.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
 		newMember.setRegType("home");
-		repo.save(newMember);
+		newMember=repo.save(newMember); //save하면 repo에서 새로만들어진거 반환함->디폴트폴더 저장을 위해 자동생성된 pin정보가 필요하니 newMember에 담아놓음
+		int pin=newMember.getPin();
+		folderService.add(pin, "북마크");
+	
 		return getList();
 	}
 	public List delete(String id) {

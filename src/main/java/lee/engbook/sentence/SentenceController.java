@@ -51,8 +51,8 @@ public class SentenceController {
 		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+오픈사전 격인 센텐스DB에 등록
 	}
 	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
-	public List delete(@PathVariable int din) {
-		return service.delete(din);
+	public void delete(@PathVariable int din) {
+		 service.delete(din);
 	}
 	@RequestMapping(value="/sfinddin/{din}",method=RequestMethod.GET)
 	public Sentence findDin(@PathVariable int din) {

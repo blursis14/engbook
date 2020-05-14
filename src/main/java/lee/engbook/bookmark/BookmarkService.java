@@ -41,10 +41,23 @@ public class BookmarkService {
 		return getList();
 	}
 	
-	public void delete(int pin,int din) {
+	public void deleteAll(int din) {
+		
+		List<Bookmark> bookmarks=new ArrayList<>(); 
+		
+		bookmarks=repo.findByDin(din);
+		
+		for(Bookmark b :bookmarks) {
+			repo.delete(b);
+		}//원작성자가 삭제한 북마크를 db에서 모두 삭제->다른회원들이 삭제된 북마크를 불러오는 것을 방지 
+		
+		
+	}
+	public void deleteOne(int pin,int din) { //해당회원의 북마크에서만 삭제
 		Bookmark bookmark=repo.findByPinAndDin(pin,din); //어떤북마크삭제할건지 알아내고
 		
 		repo.delete(bookmark); //삭제
+		
 	}
 	
 	
@@ -52,7 +65,8 @@ public class BookmarkService {
 	public List<SentenceListForm> getListOfFolder(int pin,String folder) {
 		List<Bookmark> bookmarkList=new ArrayList<>();
 		bookmarkList=repo.findByPinAndFolder(pin,folder); //북마크리스트 찾기
-		//System.out.println(bookmarkList);
+		
+		System.out.println(bookmarkList);
 		List<SentenceListForm> sentenceListForm=new ArrayList<>();
 		
 		
