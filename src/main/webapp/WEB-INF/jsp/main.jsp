@@ -117,6 +117,15 @@
 			size:2
 	}
 	
+	var addBookmark={} //북마크추가할 때 din들어갈 객체
+	
+	$(document).on('click','.addBookmark',function(e){
+		
+		addBookmark["din"]=parseInt($(this).attr('value'),10);
+		//북마크추가 버튼 클릭하면 din을 세팅해놓음  
+		alert(addBookmark.din);
+	})
+	
 	if($("body").height()<$(window).height()){
 		
 		//alert("스크롤바음슴");
@@ -147,9 +156,13 @@
                      .append($('<li class="list-group-item">').text(value.sentence.memo))
                      .append($('<li class="list-group-item">').text(value.tag))
                      .append($('<li class="list-group-item">').text(value.sentence.regDate))
-                     .append($('<ul class="list-group list-group-horizontal">')
-                    		 .append($('<button class="list-group-item list-group-item-primary">').text('수정'))
-                    		 .append($('<button class="list-group-item list-group-item-success">').text('삭제')));
+                     .append($('<ul class="list-group list-group-horizontal">') 
+                    		 .append($('<div class="ml-auto row mr-1">')
+                    		 .append($('<div class="addBookmark">').attr('value',value.sentence.din) //din을 알아야 추가하니까 value속성추가
+                    				 .append($('<button class="list-group-item list-group-item-primary">').text('북마크에 추가')))));
+                    	
+                    				 
+                    		 
      
      // 부모 엘리먼트에 append
      $('#cardList').append($ul);
@@ -170,7 +183,7 @@
 </head>
 <body>
 	<div class="container-fluid center-block"
-		style="width: 1000px; padding: 15px;"  id="whole">
+		style="width: 1000px; padding: 15px;" id="whole">
 
 		<div class="row">
 			<form id="search" name="search" class="form-inline">
@@ -253,9 +266,7 @@
 			<div class="container-fluid center-block"
 				style="width: 1000px; padding: 15px;">
 				<div class="row">
-					<div class="col-sm" id="cardList">
-						
-					</div>
+					<div class="col-sm" id="cardList"></div>
 
 
 

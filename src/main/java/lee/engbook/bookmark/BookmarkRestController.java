@@ -35,9 +35,13 @@ public class BookmarkRestController {
 		return service.getList();
 	}
 	
-	@RequestMapping(value="/badd/{pin}/{din}/{folder}",method=RequestMethod.GET)
-	public List<Bookmark> add(@PathVariable int pin, @PathVariable int din,@PathVariable String folder){
-		return service.add(pin, din, folder);
+	@PostMapping("/bookmark/add")
+	public void add(@RequestBody HashMap<String,Object> addBookmark,HttpSession session){
+		AuthInfo authInfo=(AuthInfo)session.getAttribute("authhInfo");
+		int pin=memberService.findPin(authInfo.getId());
+		int din=(int)addBookmark.get("din");
+		String folder=(String)addBookmark.get("folder");
+		service.add(pin, din, folder);
 	}
 	
 	@PostMapping("/bookmark/delete") //북마크db에서 삭제되고 전체리스트에서도 삭제되는 기능 -센텐스의 작성자에만 해당

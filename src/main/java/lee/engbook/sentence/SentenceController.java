@@ -42,7 +42,7 @@ public class SentenceController {
 	
 	
 	@PostMapping("/sadd")
-	public void add(SentenceForm sentenceForm,HttpSession session){
+	public void add(SentenceForm sentenceForm,HttpSession session){ //자기가 쓴 센텐스 저장할때 
 		System.out.println(sentenceForm);
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
 		int pin =memberService.findPin(authInfo.getId()); 
