@@ -122,8 +122,18 @@
 	$(document).on('click','.addBookmark',function(e){
 		
 		addBookmark["din"]=parseInt($(this).attr('value'),10);
+		
 		//북마크추가 버튼 클릭하면 din을 세팅해놓음  
 		alert(addBookmark.din);
+		
+		if(document.getElementById('login')){ //top.jsp의 코드에서 지금 보이는 게 로그인버튼인지, 로그아웃 버튼인지 알 수 있다. 이에 따라 북마크를 추가하거나 로그인을 요구할 수 있음
+			window.location.replace("http://localhost:8080/login");
+		}
+		if(document.getElementById('logout')){
+			alert('로그인 되어있음');
+		}
+		
+		
 	})
 	
 	if($("body").height()<$(window).height()){
@@ -180,6 +190,7 @@
 
 
 
+
 </head>
 <body>
 	<div class="container-fluid center-block"
@@ -193,11 +204,7 @@
 				<button class="btn btn-success" id="btn" type="submit">검색</button>
 			</form>
 			<c:if test="${!empty authInfo }">
-				<!-- 로그인해야 추가할수있게 -->
-				<!-- <button type="button" id="addSentence"
-				class="btn btn-outline-info ml-2" data-toggle="modal"
-				data-target="#addSentenceModal">추가</button> -->
-
+				<!-- 로그인해야 sentence를 추가할 수 있게함 -->
 				<a class="btn btn-outline-info ml-2" role="button" id="addSentence"
 					data-toggle="modal" data-target="#addSentenceModal">추가</a>
 			</c:if>

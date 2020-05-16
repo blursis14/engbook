@@ -64,7 +64,7 @@ public class SentenceController {
 	}
 	
 	@PostMapping("/list/sentence")
-	public List<SentenceListForm> list(@RequestBody HashMap<String,Object> param){
+	public List<SentenceListForm> list(@RequestBody HashMap<String,Object> param){ //메인에 보이는 리스트
 		
 		int page=(int)param.get("page");
 		int size=(int)param.get("size");

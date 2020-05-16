@@ -26,11 +26,11 @@
 			<div id="member">
 				<ul class="navbar-nav navbar-dark">
 					<c:if test="${empty authInfo }">
-						<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" id="login" href="/login">로그인</a></li>
 						<li class="nav-item"><a class="nav-link" href="/needLogin">북마크</a></li>
 					</c:if>
 					<c:if test="${!empty authInfo }">
-						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" id="logout" href="/logout">로그아웃</a></li>
 						<li class="nav-item"><a class="nav-link" href="/bookmark">북마크</a></li>
 					</c:if>
 					
