@@ -19,7 +19,6 @@
 		$.ajax({
 			type : "POST",
 			url : "/bookmark/delete",
-			//async:false,
 			data : JSON.stringify(data),
 			contentType : "application/json;charset=UTF-8",
 			success : function(data) {
@@ -37,7 +36,10 @@
 
 		var data = {}
 		data["din"] = parseInt($(this).attr('value'), 10); //value=디비의 din컬럼
-
+		
+		//data["folder"]="테스트폴더";
+		
+		alert(JSON.stringify(data));
 		$.ajax({
 			type : "POST",
 			url : "/bookmark/pass",
