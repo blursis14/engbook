@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,8 +7,85 @@
 <title>bookmark-list</title>
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <jsp:include page="../top.jsp" flush="false" />
-
 <script type="text/javascript">
+	
+var param = {
+	    page : 0,
+	    size : 3,
+	    folder:"${folder}"//컨트롤러에서 모델앤뷰로 추가한 폴더속성
+	  }
+	
+	
+	if ($("body").height() < $(window).height()) {
+
+		fireListAjax(); //스크롤바가 없는 처음 화면에서 리스트 가져오기 
+
+	}
+
+	$(window).scroll(
+			function() {
+				if ($(window).scrollTop() + 1 >= $(document).height()
+						- $(window).height()) {
+					param.page++;//스크롤바 바닥에 닿을 때 마다 북마크 두 개 씩 더 가져옴 
+					fireListAjax();
+				}
+			});
+
+
+
+	function fireListAjax() {
+		$.ajax({
+					type : 'POST',
+					url : '/bookmark/list',
+					dataType : 'json',
+					data : JSON.stringify(param),
+					contentType : "application/json; charset=UTF-8",
+
+					success : function(data) {
+alert(data);
+						$.each(data,
+										function(key, value) {
+											var $ul = $(
+													'<ul class="list-group mb-3">')
+													.append(
+															$(
+																	'<li class="list-group-item">')
+																	.text(
+																			value.sentence.sentence))
+													.append(
+															$(
+																	'<li class="list-group-item">')
+																	.text(
+																			value.sentence.mean))
+													.append(
+															$(
+																	'<li class="list-group-item">')
+																	.text(
+																			value.sentence.memo))
+													.append(
+															$(
+																	'<li class="list-group-item">')
+																	.text(
+																			value.tag))
+													.append(
+															$(
+																	'<li class="list-group-item">')
+																	.text(
+																			value.sentence.regDate));
+													
+
+											// 부모 엘리먼트에 append
+											$('#bookmark-list').append($ul);
+										})
+
+					},
+					error : function(e) {
+						alert('loadAjax실패');
+					}
+
+				})
+	}
+
 	//삭제 버튼 눌림
 	$(document).on('click', '.delete', function(e) {
 
@@ -36,9 +112,7 @@
 
 		var data = {}
 		data["din"] = parseInt($(this).attr('value'), 10); //value=디비의 din컬럼
-		
-		//data["folder"]="테스트폴더";
-		
+
 		alert(JSON.stringify(data));
 		$.ajax({
 			type : "POST",
@@ -55,65 +129,15 @@
 
 	});
 </script>
-
-
 </head>
 <body>
-
-
-
-
-	<div class="container-fluid center-block"
-		style="width: 1000px; padding: 15px;" id="root">
-
-
-		<c:if test="${!empty bookmarks }">
-			<div class="row">
-				<div class="col-sm">
-					<ul class="list-group" id="bookmark-list">
-
-						<c:forEach var="bookmark" items="${bookmarks}">
-							<ul class="list-group mb-3">
-								<li class="list-group-item">${bookmark.sentence.sentence }</li>
-								<li class="list-group-item">${bookmark.sentence.mean }</li>
-
-								<li class="list-group-item">${bookmark.sentence.memo }</li>
-
-								<li class="list-group-item">${bookmark.tag }</li>
-								<li class="list-group-item">${bookmark.sentence.regDate }</li>
-
-								<li class="list-group-item">
-									<div class="row">
-										<div class="col-md-8"></div>
-										<div class="ml-auto row mr-2">
-										<c:if test="${pin==bookmark.sentence.pin }">
-											<div class="delete" value="${bookmark.sentence.din }">
-												<a class="btn btn-outline-info mr-1" role="button">삭제</a>
-											</div>
-										</c:if>
-											<div class="pass" value="${bookmark.sentence.din }">
-												<a class="btn btn-outline-info" role="button">외웠어요</a>
-											</div>
-										</div>
-									</div>
-
-								</li>
-
-
-							</ul>
-						</c:forEach>
-
-					</ul>
+		<div class="container-fluid center-block" style="width: 1000px; padding: 15px;" id="root">
+				<div class="row">
+						<div class="col-sm">
+								<ul class="list-group" id="bookmark-list">
+								</ul>
+						</div>
 				</div>
-			</div>
-		</c:if>
-
-
-
-	</div>
-
-
-
-
+		</div>
 </body>
 </html>

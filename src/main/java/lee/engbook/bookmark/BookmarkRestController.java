@@ -1,22 +1,21 @@
 package lee.engbook.bookmark;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lee.engbook.AuthInfo;
 import lee.engbook.member.MemberService;
+import lee.engbook.sentence.SentenceListForm;
 import lee.engbook.sentence.SentenceService;
+import lee.engbook.tag.TagService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,10 +28,37 @@ public class BookmarkRestController {
 	private MemberService memberService;
 	@Autowired
 	private SentenceService sentenceService;
+	@Autowired
+	private TagService tagService;
 	
-	@RequestMapping(value="/blist",method=RequestMethod.GET)
-	public List<Bookmark> list(){
-		return service.getList();
+	@PostMapping("/bookmark/list")
+	public List<SentenceListForm> list(@RequestBody HashMap<String,Object> param,HttpSession session){
+		
+		int page=(int)param.get("page");
+		int size=(int)param.get("size");
+		String folder=(String)param.get("folder");//어떤 폴더에 있는 북마크 리스트인지 알아내기
+		System.out.println(param);
+		
+		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
+		int pin=memberService.findPin(authInfo.getId()); //지금 로그인 한 회원의 pin 조회
+		
+		List<Bookmark> bookmarks=service.findBookmarkByPageable(page,size,pin,folder);
+		
+		List<SentenceListForm> sentenceListForm=new ArrayList<>();
+		String tag;
+		
+		for(Bookmark bookmark:bookmarks) {
+			tag=tagService.findTagByDin(bookmark.getDin());
+			SentenceListForm slf=new SentenceListForm();
+			slf.setSentence(sentenceService.findByDin(bookmark.getDin()));//din으로 조회해서 센텐스 하나씩 받아오기
+			slf.setTag(tag);
+			sentenceListForm.add(slf);
+		}
+		System.out.println(sentenceListForm);
+		return sentenceListForm;
+		
+		
+		
 	}
 	
 	@PostMapping("/bookmark/add")
@@ -40,9 +66,9 @@ public class BookmarkRestController {
 		System.out.println(param);
 		
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
-		
 		int pin=memberService.findPin(authInfo.getId()); //지금 로그인 한 회원의 pin 조회
 		System.out.println(pin);
+		
 		int din=(int)param.get("din"); //북마크에 추가할 센텐스의 문서번호인 din 추출
 		String folder=(String)param.get("folder"); //북마크의 폴더 파라미터 추출
 		service.add(pin, din, folder); 

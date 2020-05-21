@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface SentenceRepository extends PagingAndSortingRepository<Sentence,Long> {
-	Sentence findByDin(int din); //din(sentence 하나당 고유번호) 
+	Sentence findByDin(int din); //din(sentence 하나당 고유번호)으로 센텐스찾기 
 	List<Sentence> findByPin(int pin);//특정회원이 등록한 sentences 반환
 	Page<Sentence> findAll(Pageable page);
 	

@@ -56,11 +56,11 @@ public class SentenceController {
 	}
 	@RequestMapping(value="/sfinddin/{din}",method=RequestMethod.GET)
 	public Sentence findDin(@PathVariable int din) {
-		return service.findDin(din);
+		return service.findByDin(din);
 	}
 	@RequestMapping(value="/sfindpin/{pin}",method=RequestMethod.GET)
 	public List findPin(@PathVariable int pin) {
-		return service.findPin(pin);
+		return service.findByPin(pin);
 	}
 	
 	@PostMapping("/list/sentence")
@@ -80,7 +80,7 @@ public class SentenceController {
 			slf.setTag(tag);
 			sentenceListForm.add(slf); //(sentenceListForm:센텐스객체+한줄화된 태그)객체들의 리스트를 메인에 보냄 
 		}
-		
+	
 		return sentenceListForm;
 	}
 	

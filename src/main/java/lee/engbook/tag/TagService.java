@@ -51,7 +51,7 @@ public class TagService {
 		List<Sentence> sentenceList = new ArrayList<>();
 		for (Tag tag : tagList) {
 			int din = tag.getDin();
-			sentenceList.add(sentence_service.findDin(din));
+			sentenceList.add(sentence_service.findByDin(din));
 		}
 		return sentenceList;
 	}

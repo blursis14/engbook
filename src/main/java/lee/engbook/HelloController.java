@@ -29,8 +29,8 @@ public class HelloController {
 	}
 	
 	@RequestMapping("/main")
-	public String main(Model model) {
-		//model.addAttribute("firstData",)
+	public String main() {
+		
 		return "main";
 	}
 	

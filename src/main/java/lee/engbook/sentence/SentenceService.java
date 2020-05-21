@@ -39,15 +39,15 @@ public class SentenceService {
 		repo.delete(sentence);
 		
 	}
-	public Sentence findDin(int din) {
+	public Sentence findByDin(int din) {
 		return repo.findByDin(din); 
 	}
-	public List findPin(int pin) {
+	public List findByPin(int pin) {
 		return (List)repo.findByPin(pin);
 	}
 	
 	public List<Sentence> findSentenceByPageable(int page,int size){
-		Pageable pageable=(Pageable) PageRequest.of(page, size,Sort.by("din").descending());
+		Pageable pageable=(Pageable) PageRequest.of(page, size,Sort.by("din").descending());//최신순정렬
 		return (repo.findAll(pageable)).getContent();
 	}
 	

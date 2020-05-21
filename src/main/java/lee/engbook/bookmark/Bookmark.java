@@ -17,7 +17,7 @@ public class Bookmark {
 
 	@Id
 	@GeneratedValue
-	private int id;//필요없는 프로퍼티인데 identifier없다고 해서 써야됨 
+	private int id;//identifier & 최신순정렬하는데씀 
 	
 	@Column(nullable=false)
 	private int din;

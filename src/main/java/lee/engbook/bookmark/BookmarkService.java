@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lee.engbook.sentence.Sentence;
@@ -29,6 +32,14 @@ public class BookmarkService {
 	
 	public List getList() {
 		return (List) repo.findAll();
+	}
+	
+	public List<Bookmark> findBookmarkByPageable(int page,int size,int pin,String folder){
+		Pageable pageable=(Pageable) PageRequest.of(page, size,Sort.by("id").descending());//최신순정렬
+		
+		System.out.println((repo.findByPinAndFolder(pin,folder,pageable)).getContent());
+		
+		return (repo.findByPinAndFolder(pin,folder,pageable)).getContent();
 	}
 	
 	public List add(int pin, int din, String folder) {
@@ -62,7 +73,7 @@ public class BookmarkService {
 	
 	
 	
-	public List<SentenceListForm> getListOfFolder(int pin,String folder) {
+	public List<SentenceListForm> getListOfFolder(int pin,String folder) {//무한스크롤 구현했으면 이거 지워
 		List<Bookmark> bookmarkList=new ArrayList<>();
 		bookmarkList=repo.findByPinAndFolder(pin,folder); //북마크리스트 찾기
 		
@@ -72,7 +83,7 @@ public class BookmarkService {
 		
 		for(Bookmark bookmark:bookmarkList) {
 			//System.out.println(bookmark.getDin());
-			Sentence sentence=sentenceService.findDin(bookmark.getDin());
+			Sentence sentence=sentenceService.findByDin(bookmark.getDin());
 			sentence.setRegDate(bookmark.getRegDate()); //자기가 등록한거면 등록일이 같겠지만 남이 쓴 걸 북마크로 추가했을 때는 북마크에 있는 등록일이 진짜 등록일임
 			SentenceListForm slf=new SentenceListForm();
 			slf.setSentence(sentence);
@@ -82,7 +93,9 @@ public class BookmarkService {
 		
 		return sentenceListForm; 
 	}
+	
 
+	
 }
 
 

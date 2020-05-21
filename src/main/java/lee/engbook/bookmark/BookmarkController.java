@@ -43,17 +43,16 @@ public class BookmarkController {
 		return mav;
 	}
 
-	@RequestMapping("/bookmark/{folder}")
+	@RequestMapping("/bookmark/{folder}") //폴더클릭하면 bookmark/list로 이동,어떤폴더 눌렀는지 속성 추가해줌 
 	public ModelAndView bookmarkList(@PathVariable String folder,HttpSession session) {
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo"); 
+		//AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo"); 
 
-		int pin = memberService.findPin(authInfo.getId()); //사용자의 pin 찾기
+		//int pin = memberService.findPin(authInfo.getId()); //사용자의 pin 찾기
 		
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("bookmarks",service.getListOfFolder(pin, folder));  //회원이 폴더에 저장한 북마크리스트를 받음
-		mav.addObject("pin",pin);//북마크작성자와 bookmark.sentence.pin은 다를 수 있으므로! 북마크작성자의 pin도 보냄.이에 삭제권한이 달렸다.
-		
+		//mav.addObject("pin",pin);//북마크작성자와 bookmark.sentence.pin은 다를 수 있으므로! 북마크작성자의 pin도 보냄.이에 삭제권한이 달렸다.
+		mav.addObject("folder",folder);
 		
 		mav.setViewName("bookmark/list"); //북마크/리스트로 뷰 경로 지정
 		
