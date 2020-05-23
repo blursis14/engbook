@@ -8,14 +8,14 @@
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <jsp:include page="../top.jsp" flush="false" />
 <script type="text/javascript">
-	
-var param = {
-	    page : 0,
-	    size : 3,
-	    folder:"${folder}"//컨트롤러에서 모델앤뷰로 추가한 폴더속성
-	  }
-	
-	
+	var pin = "${pin}";
+
+	var param = {
+		page : 0,
+		size : 3,
+		folder : "${folder}"//컨트롤러에서 모델앤뷰로 추가한 폴더속성
+	}
+
 	if ($("body").height() < $(window).height()) {
 
 		fireListAjax(); //스크롤바가 없는 처음 화면에서 리스트 가져오기 
@@ -31,10 +31,9 @@ var param = {
 				}
 			});
 
-
-
 	function fireListAjax() {
-		$.ajax({
+		$
+				.ajax({
 					type : 'POST',
 					url : '/bookmark/list',
 					dataType : 'json',
@@ -42,9 +41,12 @@ var param = {
 					contentType : "application/json; charset=UTF-8",
 
 					success : function(data) {
-alert(data);
-						$.each(data,
+					
+						$
+								.each(
+										data,
 										function(key, value) {
+
 											var $ul = $(
 													'<ul class="list-group mb-3">')
 													.append(
@@ -72,7 +74,73 @@ alert(data);
 																	'<li class="list-group-item">')
 																	.text(
 																			value.sentence.regDate));
-													
+											
+											if (value.sentence.pin == pin) { //센텐스 작성자인지, 단순 북마크 추가자인지 비교 후 작성자면 삭제&외웠어요 버튼, 추가자면 외웠어요버튼만 보이기
+
+												$ul
+														.append($(
+																'<li class="list-group-item">')
+																.append(
+																		$(
+																				'<div class="row">')
+																				.append(
+																						$(
+																								'<div class="col-md-8">')
+																								.append(
+																										$(
+																												'<div class="ml-auto row mr-2">')
+																												.append(
+																														$(
+																																'<div class="delete">')
+																																.attr(
+																																		'value',
+																																		value.sentence.din)
+																																.append(
+																																		$(
+																																				'<a class="btn btn-outline-info mr-1" role="button">')
+																																				.text(
+																																						'삭제')))
+																												.append(
+																														$(
+																																'<div class="pass">')
+																																.attr(
+																																		'value',
+																																		value.sentence.din)
+																																.append(
+																																		$(
+																																				'<a class="btn btn-outline-info mr-1" role="button">')
+																																				.text(
+																																						'외웠어요')))
+																																						))));
+
+											}else{
+												  $ul
+						                            .append($(
+						                                '<li class="list-group-item">')
+						                                .append(
+						                                    $(
+						                                        '<div class="row">')
+						                                        .append(
+						                                            $(
+						                                                '<div class="col-md-8">')
+						                                                .append(
+						                                                    $(
+						                                                        '<div class="ml-auto row mr-2">')
+						                                                        .append(
+						                                                            $(
+						                                                                '<div class="pass">')
+						                                                                .attr(
+						                                                                    'value',
+						                                                                    value.sentence.din)
+						                                                                .append(
+						                                                                    $(
+						                                                                        '<a class="btn btn-outline-info mr-1" role="button">')
+						                                                                        .text(
+						                                                                            '외웠어요')))
+						                                                ))));
+											}
+											
+											
 
 											// 부모 엘리먼트에 append
 											$('#bookmark-list').append($ul);
@@ -91,7 +159,7 @@ alert(data);
 
 		var data = {}
 		data["din"] = parseInt($(this).attr('value'), 10); //value=디비의 din컬럼
-
+		 
 		$.ajax({
 			type : "POST",
 			url : "/bookmark/delete",
@@ -113,7 +181,6 @@ alert(data);
 		var data = {}
 		data["din"] = parseInt($(this).attr('value'), 10); //value=디비의 din컬럼
 
-		alert(JSON.stringify(data));
 		$.ajax({
 			type : "POST",
 			url : "/bookmark/pass",

@@ -76,21 +76,24 @@ public class BookmarkRestController {
 	
 	@PostMapping("/bookmark/delete") //북마크db에서 삭제되고 전체리스트에서도 삭제되는 기능 -센텐스의 작성자에만 해당
 	public void delete(@RequestBody HashMap<String,Object> param,HttpSession session){
+		System.out.println(param);
 		
 		int din=(int)param.get("din");
-	
+		
 		service.deleteAll(din); //북마크db에서 din에 해당하는 것을 모두 삭제 (북마크 작성자, 북마크 퍼간 회원);
 		sentenceService.delete(din);//전체 센텐스에서도 삭제
 	}
 	
 	@PostMapping("/bookmark/pass") //외웠어요 버튼 누르면 자기 북마크에서만 안보이고 전체리스트에는 남아있는 기능-작성자의 삭제권한 없어짐
 	public void pass(@RequestBody HashMap<String,Object> param,HttpSession session) {
+		System.out.println(param);
+		
 		int din=(int)param.get("din");
 		
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
-		System.out.println(param);
+		
 		int pin=memberService.findPin(authInfo.getId()); 
-
+		
 		service.deleteOne(pin,din); //자기 북마크에서만 삭제 
 	}
 	

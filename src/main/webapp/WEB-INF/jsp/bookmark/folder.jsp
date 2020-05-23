@@ -73,6 +73,9 @@ $(function(){
 		
 						<a class="btn btn-outline-primary mb-1" role="button" id="addFolder"
 							data-toggle="modal" data-target="#addFolderModal">폴더 추가</a>
+							
+						<a class="btn btn-outline-primary mb-1" role="button"
+						  href="/bookmark/folder/edit" id="editFolder">편집</a>	
 						
 						
 					</ul>
