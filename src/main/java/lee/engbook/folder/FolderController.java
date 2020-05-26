@@ -1,12 +1,13 @@
 package lee.engbook.folder;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,9 +48,16 @@ public class FolderController {
 		
 	}
 	
-	@RequestMapping(value="/fdelete/{pin}/{folder}",method=RequestMethod.GET)
-	public List<Folder> delete(@PathVariable int pin,@PathVariable String folder){ 
-		return service.delete(pin,folder); //삭제 후 특정회원의 폴더리스트 반환
+	@PostMapping("/folder/delete")
+	public void delete(@RequestBody HashMap<String,Object> param,HttpSession session) {
+		System.out.println(param);
+		String folder=(String)param.get("folder"); //어떤폴더를 삭제할건지 알아내기
+		
+		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
+		int pin=memberService.findPin(authInfo.getId()); //회원pin 알아내기
+		
+		service.delete(pin, folder);
+	
 	}
 }
 

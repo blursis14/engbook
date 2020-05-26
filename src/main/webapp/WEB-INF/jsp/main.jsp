@@ -150,7 +150,7 @@
 					dinAndFolder["folder"] = $(
 							"#bookmark-folder-select option:selected").val(); //선택한 폴더 이름을 변수에 저장
 
-					alert(JSON.stringify(dinAndFolder));
+					//alert(JSON.stringify(dinAndFolder));
 
 					$.ajax({
 						type : "POST",

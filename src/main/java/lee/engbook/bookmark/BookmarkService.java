@@ -30,9 +30,7 @@ public class BookmarkService {
 	@Autowired
 	TagService tagService;
 	
-	public List getList() {
-		return (List) repo.findAll();
-	}
+	
 	
 	public List<Bookmark> findBookmarkByPageable(int page,int size,int pin,String folder){
 		Pageable pageable=(Pageable) PageRequest.of(page, size,Sort.by("id").descending());//최신순정렬
@@ -42,14 +40,14 @@ public class BookmarkService {
 		return (repo.findByPinAndFolder(pin,folder,pageable)).getContent();
 	}
 	
-	public List add(int pin, int din, String folder) {
+	public void add(int pin, int din, String folder) {
 		Bookmark bookmark=new Bookmark();
 		bookmark.setPin(pin);
 		bookmark.setDin(din);
 		bookmark.setFolder(folder);
 		bookmark.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
 		repo.save(bookmark);
-		return getList();
+		
 	}
 	
 	public void deleteAll(int din) {
@@ -71,6 +69,14 @@ public class BookmarkService {
 		
 	}
 	
+	public void deleteFolder(int pin,String folder) {
+		List<Bookmark> bookmarks=repo.findByPinAndFolder(pin,folder);
+		
+		for(Bookmark bookmark:bookmarks) {
+			repo.delete(bookmark);
+		}
+	
+	}
 	
 	
 	public List<SentenceListForm> getListOfFolder(int pin,String folder) {//무한스크롤 구현했으면 이거 지워
@@ -94,6 +100,9 @@ public class BookmarkService {
 		return sentenceListForm; 
 	}
 	
+	public List<Bookmark> getListOfBookmark(int pin,String folder){
+		return repo.findByPinAndFolder(pin,folder);
+	}
 
 	
 }
