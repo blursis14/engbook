@@ -104,7 +104,13 @@ public class BookmarkService {
 		return repo.findByPinAndFolder(pin,folder);
 	}
 
-	
+	public void editFolder(int pin, String oldFolder,String newFolder) {//폴더 수정시 북마크가 속한 폴더이름도 수정
+		List<Bookmark> bookmarks=getListOfBookmark(pin,oldFolder);
+		for(Bookmark bookmark:bookmarks) {
+			bookmark.setFolder(newFolder);
+			repo.save(bookmark);
+		}
+	}
 }
 
 

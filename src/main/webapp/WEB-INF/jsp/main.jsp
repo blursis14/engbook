@@ -276,6 +276,7 @@
 						<c:if test="${empty authInfo }">
 								<a class="btn btn-outline-info ml-2" href="needLogin" role="button">추가</a>
 						</c:if>
+						
 						<!-- sentence추가 모달 영역 -->
 						<div class="modal fade" id="addSentenceModal" tabindex="-1" role="dialog">
 								<div class="modal-dialog" role="document">
@@ -316,6 +317,7 @@
 										</div>
 								</div>
 						</div>
+						
 						<!-- 북마크 추가 폴더선택 모달 -->
 						<div class="modal fade" id="addBookmarkModal" tabindex="-1" role="dialog">
 								<div class="modal-dialog" role="document">
@@ -345,5 +347,6 @@
 										<div class="col-sm" id="cardList"></div>
 								</div>
 						</div>
+						</div></div>
 </body>
 </html>

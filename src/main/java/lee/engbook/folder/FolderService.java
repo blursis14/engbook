@@ -19,9 +19,7 @@ public class FolderService {
 	@Autowired
 	BookmarkService bookmarkService;
 	
-	public List getList() {
-		return (List)repo.findAll();
-	}
+	
 	public Folder add(int pin,String folderName) { //인스턴스folder랑 파라미터folder(폴더이름)헷갈릴까봐 파라미터는 folderName으로 정함 
 		Folder folder=new Folder();
 		folder.setPin(pin);
@@ -43,7 +41,37 @@ public class FolderService {
 		
 	}
 	
+	public void edit(int pin,String oldFolder,String newFolder) {//폴더이름수정
+		Folder folder=repo.findByPinAndFolder(pin,oldFolder);
+		folder.setFolder(newFolder);
+		repo.save(folder);//새로운 폴더이름으로 업데이트
+		
+		bookmarkService.editFolder(pin, oldFolder, newFolder);//북마크db에서도 폴더이름 수정
+		
+	}
+	
+	
 	public List find(int pin) { //특정회원이가진 폴더들
 		return (List)repo.findByPin(pin);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

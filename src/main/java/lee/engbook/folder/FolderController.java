@@ -26,10 +26,6 @@ public class FolderController {
 	@Autowired 
 	private MemberService memberService;
 	
-	@RequestMapping(value="/flist",method=RequestMethod.GET)
-	public List<Folder> list(){
-		return service.getList();
-	}
 	@RequestMapping(value="/ffind",method=RequestMethod.POST)
 	public List<Folder> find(HttpSession session){ //로그인한 회원이 가진 폴더리스트
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
@@ -58,6 +54,22 @@ public class FolderController {
 		
 		service.delete(pin, folder);
 	
+	}
+	
+	@PostMapping("/folder/edit")
+	public void edit(@RequestBody HashMap<String,Object> param,HttpSession session) {
+		System.out.println(param);
+		
+		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
+		int pin=memberService.findPin(authInfo.getId()); //회원pin 알아내기
+		
+		String oldFolder=(String)param.get("old");//이전 이름
+		String newFolder=(String)param.get("new");//새로운 이름
+		
+		service.edit(pin,oldFolder,newFolder);
+	
+		
+		
 	}
 }
 
