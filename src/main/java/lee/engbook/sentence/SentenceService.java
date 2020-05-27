@@ -51,8 +51,11 @@ public class SentenceService {
 		return (repo.findAll(pageable)).getContent();
 	}
 	
-	public List<Sentence> search(String sentence,String mean,String memo){
-	return (repo.findBySentenceContainingOrMeanContainingOrMemoContaining(sentence, mean, memo));
+	public List<Sentence> search(String str){
+		
+		//String str=search
+		
+		return (repo.findBySentenceContainingOrMeanContainingOrMemoContaining(str,str,str));
 	}
 }
 

@@ -1,6 +1,5 @@
 package lee.engbook.sentence;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,13 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lee.engbook.AuthInfo;
 import lee.engbook.bookmark.BookmarkService;
 import lee.engbook.folder.FolderService;
 import lee.engbook.member.MemberService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -71,9 +70,16 @@ public class SentenceController {
 		
 		List<Sentence> sentences= service.findSentenceByPageable(page,size);//페이징해서 목록 보냄 
 		
-		//System.out.println(service.search("while", "while", "while"));
+		//System.out.println(service.search("how about"));
 	
 		return sentences;
+	}
+	
+	@PostMapping("/search")
+	public List<Sentence> search(@RequestParam(value="search",defaultValue="")String str){
+		
+		
+		return service.search("");
 	}
 	
 
