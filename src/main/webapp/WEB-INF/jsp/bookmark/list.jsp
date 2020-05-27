@@ -12,7 +12,7 @@
 
 	var param = {
 		page : 0,
-		size : 3,
+		size : 5,
 		folder : "${folder}"//컨트롤러에서 모델앤뷰로 추가한 폴더속성
 	}
 
@@ -27,6 +27,7 @@
 				if ($(window).scrollTop() + 1 >= $(document).height()
 						- $(window).height()) {
 					param.page++;//스크롤바 바닥에 닿을 때 마다 북마크 두 개 씩 더 가져옴 
+					
 					fireListAjax();
 				}
 			});
@@ -42,8 +43,7 @@
 
 					success : function(data) {
 					
-						$
-								.each(
+						$.each(
 										data,
 										function(key, value) {
 
@@ -53,29 +53,24 @@
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.sentence.sentence))
+																			value.sentence))
 													.append(
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.sentence.mean))
+																			value.mean))
 													.append(
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.sentence.memo))
+																			value.memo))
 													.append(
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.tag))
-													.append(
-															$(
-																	'<li class="list-group-item">')
-																	.text(
-																			value.sentence.regDate));
+																			value.regDate));
 											
-											if (value.sentence.pin == pin) { //센텐스 작성자인지, 단순 북마크 추가자인지 비교 후 작성자면 삭제&외웠어요 버튼, 추가자면 외웠어요버튼만 보이기
+											if (value.pin == pin) { //센텐스 작성자인지, 단순 북마크 추가자인지 비교 후 작성자면 삭제&외웠어요 버튼, 추가자면 외웠어요버튼만 보이기
 
 												$ul
 														.append($(
@@ -94,7 +89,7 @@
 																																'<div class="delete">')
 																																.attr(
 																																		'value',
-																																		value.sentence.din)
+																																		value.din)
 																																.append(
 																																		$(
 																																				'<a class="btn btn-outline-info mr-1" role="button">')
@@ -105,7 +100,7 @@
 																																'<div class="pass">')
 																																.attr(
 																																		'value',
-																																		value.sentence.din)
+																																		value.din)
 																																.append(
 																																		$(
 																																				'<a class="btn btn-outline-info mr-1" role="button">')
@@ -131,7 +126,7 @@
 						                                                                '<div class="pass">')
 						                                                                .attr(
 						                                                                    'value',
-						                                                                    value.sentence.din)
+						                                                                    value.din)
 						                                                                .append(
 						                                                                    $(
 						                                                                        '<a class="btn btn-outline-info mr-1" role="button">')

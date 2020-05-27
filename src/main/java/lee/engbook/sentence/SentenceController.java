@@ -18,7 +18,7 @@ import lee.engbook.AuthInfo;
 import lee.engbook.bookmark.BookmarkService;
 import lee.engbook.folder.FolderService;
 import lee.engbook.member.MemberService;
-import lee.engbook.tag.TagService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,9 +32,6 @@ public class SentenceController {
 	private MemberService memberService;
 	
 	@Autowired
-	private TagService tagService;
-	
-	@Autowired
 	private FolderService folderService;
 	
 	@Autowired
@@ -44,11 +41,13 @@ public class SentenceController {
 	@PostMapping("/sadd")
 	public void add(SentenceForm sentenceForm,HttpSession session){ //자기가 쓴 센텐스 저장할때 
 		System.out.println(sentenceForm);
+		
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
-		int pin =memberService.findPin(authInfo.getId()); 
+		int pin =memberService.findPin(authInfo.getId());//회원의 pin 알아내기 
+		
 		Sentence newSentence=service.add(pin,sentenceForm.getSentence(), sentenceForm.getMean(),sentenceForm.getMemo());
-		tagService.add(newSentence.getDin(),sentenceForm.getTag()); 
-		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+오픈사전 격인 센텐스DB에 등록
+		 
+		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+(전체)센텐스DB에 등록
 	}
 	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
 	public void delete(@PathVariable int din) {
@@ -64,24 +63,16 @@ public class SentenceController {
 	}
 	
 	@PostMapping("/list/sentence")
-	public List<SentenceListForm> list(@RequestBody HashMap<String,Object> param){ //메인에 보이는 리스트
+	public List<Sentence> list(@RequestBody HashMap<String,Object> param){ //메인에 보이는 리스트
 		
 		int page=(int)param.get("page");
 		int size=(int)param.get("size");
 		
 		
-		List<Sentence> sentenceList= service.findSentenceByPageable(page,size);
-		List<SentenceListForm> sentenceListForm=new ArrayList<>();
-		String tag;
-		for(Sentence sentence:sentenceList) {
-			tag=tagService.findTagByDin(sentence.getDin());
-			SentenceListForm slf=new SentenceListForm();
-			slf.setSentence(sentence);
-			slf.setTag(tag);
-			sentenceListForm.add(slf); //(sentenceListForm:센텐스객체+한줄화된 태그)객체들의 리스트를 메인에 보냄 
-		}
+		List<Sentence> sentences= service.findSentenceByPageable(page,size);//페이징해서 목록 보냄 
+		
 	
-		return sentenceListForm;
+		return sentences;
 	}
 	
 

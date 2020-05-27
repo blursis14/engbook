@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lee.engbook.AuthInfo;
 import lee.engbook.member.MemberService;
-import lee.engbook.sentence.SentenceListForm;
+import lee.engbook.sentence.Sentence;
 import lee.engbook.sentence.SentenceService;
-import lee.engbook.tag.TagService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -28,11 +27,10 @@ public class BookmarkRestController {
 	private MemberService memberService;
 	@Autowired
 	private SentenceService sentenceService;
-	@Autowired
-	private TagService tagService;
+	
 	
 	@PostMapping("/bookmark/list")
-	public List<SentenceListForm> list(@RequestBody HashMap<String,Object> param,HttpSession session){
+	public List<Sentence> list(@RequestBody HashMap<String,Object> param,HttpSession session){
 		
 		int page=(int)param.get("page");
 		int size=(int)param.get("size");
@@ -44,18 +42,18 @@ public class BookmarkRestController {
 		
 		List<Bookmark> bookmarks=service.findBookmarkByPageable(page,size,pin,folder);
 		
-		List<SentenceListForm> sentenceListForm=new ArrayList<>();
-		String tag;
+		List<Sentence> sentences=new ArrayList<>();
+	
 		
 		for(Bookmark bookmark:bookmarks) {
-			tag=tagService.findTagByDin(bookmark.getDin());
-			SentenceListForm slf=new SentenceListForm();
-			slf.setSentence(sentenceService.findByDin(bookmark.getDin()));//din으로 조회해서 센텐스 하나씩 받아오기
-			slf.setTag(tag);
-			sentenceListForm.add(slf);
+			
+			Sentence sentence=new Sentence();
+			sentence=sentenceService.findByDin(bookmark.getDin());//din으로 조회해서 센텐스 하나씩 받아오기
+			
+			sentences.add(sentence);
 		}
-		System.out.println(sentenceListForm);
-		return sentenceListForm;
+		System.out.println(sentences);
+		return sentences;
 		
 		
 		

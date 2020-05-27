@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import lee.engbook.AuthInfo;
 import lee.engbook.folder.FolderService;
 import lee.engbook.member.MemberService;
-import lee.engbook.sentence.SentenceListForm;
 
 @Controller
 public class BookmarkController {
@@ -29,8 +28,8 @@ public class BookmarkController {
 	
 	
 
-	@RequestMapping("/bookmark")
-	public ModelAndView bookmarkFolder(HttpSession session) {
+	@RequestMapping("/bookmark") //폴더목록
+	public ModelAndView bookmarkFolder(HttpSession session) { 
 		ModelAndView mav = new ModelAndView();
 
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo"); // 로그인정보 얻기

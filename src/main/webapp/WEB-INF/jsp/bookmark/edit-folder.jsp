@@ -28,6 +28,7 @@ $(document).on('click','.delete',function(e){ //삭제버튼눌림
 			type:"POST",
 			url:"/folder/delete",
 			data:JSON.stringify(folder),
+			async:false,
 			contentType:"application/json;charset=UTF-8",
 			success:function(data){
 				alert('삭제되었습니다.');
@@ -62,12 +63,13 @@ $(function(){
 	
 		editFolder["new"]=$('#folder').val(); //새로운 폴더이름 폼에서 가져오기
 		
-		alert(JSON.stringify(editFolder));
+		//alert(JSON.stringify(editFolder));
 		
 		$.ajax({
 			type:"POST",
 			url:"/folder/edit",
 			data:JSON.stringify(editFolder),
+			async:false,
 		  contentType:"application/json;charset=UTF-8",
 			success:function(){
 				alert('수정되었습니다.');

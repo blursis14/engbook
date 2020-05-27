@@ -25,8 +25,7 @@ $(function(){
 				dataType:'text',
 				data:newFolder,
 				success:function(data){
-					alert("success 호출됨");
-					alert((JSON.parse(data)).folder);
+				//	alert((JSON.parse(data)).folder);
 				
 				},
 				error:function(e){

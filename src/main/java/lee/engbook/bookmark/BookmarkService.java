@@ -12,9 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lee.engbook.sentence.Sentence;
-import lee.engbook.sentence.SentenceListForm;
+
 import lee.engbook.sentence.SentenceService;
-import lee.engbook.tag.TagService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,8 +26,6 @@ public class BookmarkService {
 	@Autowired
 	SentenceService sentenceService;
 	
-	@Autowired
-	TagService tagService;
 	
 	
 	
@@ -79,25 +76,24 @@ public class BookmarkService {
 	}
 	
 	
-	public List<SentenceListForm> getListOfFolder(int pin,String folder) {//무한스크롤 구현했으면 이거 지워
+	public List<Sentence> getListOfFolder(int pin,String folder) {//무한스크롤 구현했으면 이거 지워
 		List<Bookmark> bookmarkList=new ArrayList<>();
 		bookmarkList=repo.findByPinAndFolder(pin,folder); //북마크리스트 찾기
 		
 		System.out.println(bookmarkList);
-		List<SentenceListForm> sentenceListForm=new ArrayList<>();
+		List<Sentence> sentences=new ArrayList<>();
 		
 		
 		for(Bookmark bookmark:bookmarkList) {
 			//System.out.println(bookmark.getDin());
 			Sentence sentence=sentenceService.findByDin(bookmark.getDin());
-			sentence.setRegDate(bookmark.getRegDate()); //자기가 등록한거면 등록일이 같겠지만 남이 쓴 걸 북마크로 추가했을 때는 북마크에 있는 등록일이 진짜 등록일임
-			SentenceListForm slf=new SentenceListForm();
-			slf.setSentence(sentence);
-			slf.setTag(tagService.findTagByDin(bookmark.getDin()));
-			sentenceListForm.add(slf);
+			sentence.setRegDate(bookmark.getRegDate()); 
+			//내가 등록한거면 등록일이 같겠지만, 남이 쓴 걸 북마크로 추가했을 때는 내가 추가한 날이 북마크의 등록일이 되는 것임
+			
+			sentences.add(sentence);
 		} //북마크의 din정보를 이용해 sentence리스트들을 만들기
 		
-		return sentenceListForm; 
+		return sentences; 
 	}
 	
 	public List<Bookmark> getListOfBookmark(int pin,String folder){

@@ -97,14 +97,14 @@
 
 	}
 
-	$(function() {
 
-		// alert('시작');
-
-	});
-
+	
+	
+	
+	
 	var dinAndFolder = {} //북마크 추가할 때 필요한-센텐스의 din이랑 선택한 folder
-
+	
+//북마크추가1-추가버튼눌러서 모달뜰 때, 북마크의 din저장해놓기
 	$(document).on(
 			'click',
 			'.addBookmark',
@@ -142,7 +142,7 @@
 
 			})
 
-	//모달에서 폴더선택 후 북마크추가
+	//북마크추가2-모달에서 폴더선택하면 folder저장후 서버에 등록
 	$(function() {
 		$("#bookmark-folder").submit(
 				function() {
@@ -156,9 +156,10 @@
 						type : "POST",
 						url : "/bookmark/add",
 						data : JSON.stringify(dinAndFolder),
+						async:false,
 						contentType : "application/json;charset=UTF-8",
 						success : function(data) {
-							alert('success');
+							alert('북마크를 추가했습니다.');
 						},
 						error : function(e) {
 							alert('실패');
@@ -166,10 +167,14 @@
 					})
 				})
 	})
+	
+	
 	  var param = {
         page : 0,
-        size : 2
+        size : 5
       }
+	
+	
 	if ($("body").height() < $(window).height()) {
 
 		fireListAjax(); //스크롤바가 없는 처음 화면에서 리스트 가져오기 
@@ -190,8 +195,7 @@
 	
 
 	function fireListAjax() {
-		$
-				.ajax({
+		$.ajax({
 					type : 'POST',
 					url : '/list/sentence',
 					dataType : 'json',
@@ -208,27 +212,22 @@
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.sentence.sentence))
+																			value.sentence))
 													.append(
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.sentence.mean))
+																			value.mean))
 													.append(
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.sentence.memo))
+																			value.memo))
 													.append(
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.tag))
-													.append(
-															$(
-																	'<li class="list-group-item">')
-																	.text(
-																			value.sentence.regDate))
+																			value.regDate))
 													.append(
 															$(
 																	'<ul class="list-group list-group-horizontal">')
@@ -240,7 +239,7 @@
 																									'<div class="addBookmark">')
 																									.attr(
 																											'value',
-																											value.sentence.din)
+																											value.din)
 																									//din을 알아야 추가하니까 value속성추가
 																									.append(
 																											$(
@@ -300,9 +299,6 @@
 																<div class="form-group">
 																		메모:<br />
 																		<textarea class="form-control" id="memo" name="memo"></textarea>
-																</div>
-																<div class="form-group">
-																		태그:<br /> <input class="form-control" id="tag" name="tag" placeholder="태그는 띄어쓰기로 구분됩니다" />
 																</div>
 																<div id="folderList" class="container">
 																		폴더선택: <select id="folder-select" class="form-control" name="folder">
