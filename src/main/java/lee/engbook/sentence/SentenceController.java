@@ -71,6 +71,7 @@ public class SentenceController {
 		
 		List<Sentence> sentences= service.findSentenceByPageable(page,size);//페이징해서 목록 보냄 
 		
+		//System.out.println(service.search("while", "while", "while"));
 	
 		return sentences;
 	}
