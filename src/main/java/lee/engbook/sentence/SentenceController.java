@@ -71,16 +71,18 @@ public class SentenceController {
 		List<Sentence> sentences= service.findSentenceByPageable(page,size);//페이징해서 목록 보냄 
 		
 		//System.out.println(service.search("how about"));
+		try {
+			service.buildIndex();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		service.search();
 	
 		return sentences;
 	}
 	
-	@PostMapping("/search")
-	public List<Sentence> search(@RequestParam(value="search",defaultValue="")String str){
-		
-		
-		return service.search("");
-	}
+	
 	
 
 }

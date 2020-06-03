@@ -1,12 +1,21 @@
 package lee.engbook.sentence;
 
-import org.springframework.data.domain.Pageable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
+import org.apache.lucene.search.Query;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +27,9 @@ public class SentenceService {
 	
 	@Autowired
 	SentenceRepository repo;
+	
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
+	private EntityManager entityManager;
 	
 	public List getList() {
 		return (List)repo.findAll();
@@ -51,11 +63,21 @@ public class SentenceService {
 		return (repo.findAll(pageable)).getContent();
 	}
 	
-	public List<Sentence> search(String str){
+	public void buildIndex() throws InterruptedException{
 		
-		//String str=search
+			FullTextEntityManager fullTextEntityManager=Search.getFullTextEntityManager(entityManager);
+			fullTextEntityManager.createIndexer().startAndWait();
 		
-		return (repo.findBySentenceContainingOrMeanContainingOrMemoContaining(str,str,str));
+	}
+	@SuppressWarnings("unckecked")
+	public void search() {
+		FullTextEntityManager fullTextEntityManager=Search.getFullTextEntityManager(entityManager);
+		QueryBuilder queryBuilder =fullTextEntityManager.getSearchFactory()
+				.buildQueryBuilder().forEntity(Sentence.class).get();
+		Query query=queryBuilder.keyword().wildcard().onField("sentence")
+				.matching("*"+"i"+"*").createQuery();
+		FullTextQuery fullTextQuery=fullTextEntityManager.createFullTextQuery(query, Sentence.class);
+		System.out.println(fullTextQuery.getResultList());
 	}
 }
 

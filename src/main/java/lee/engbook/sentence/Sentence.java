@@ -9,11 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name="sentence")
+@Indexed
 public class Sentence {
 	
 	@Id
@@ -24,9 +28,12 @@ public class Sentence {
 	private int pin;
 	
 	@Column(nullable=false)
+	@Field
 	private String sentence;
 	
+	
 	private String mean;
+	
 	
 	private String memo;
 	
