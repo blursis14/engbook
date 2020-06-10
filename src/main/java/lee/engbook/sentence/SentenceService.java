@@ -75,7 +75,7 @@ public class SentenceService {
 		QueryBuilder queryBuilder =fullTextEntityManager.getSearchFactory()
 				.buildQueryBuilder().forEntity(Sentence.class).get();
 		Query query=queryBuilder.keyword().wildcard().onField("sentence")
-				.matching("*"+"i"+"*").createQuery();
+				.matching("*"+"double"+"*").createQuery();
 		FullTextQuery fullTextQuery=fullTextEntityManager.createFullTextQuery(query, Sentence.class);
 		System.out.println(fullTextQuery.getResultList());
 	}

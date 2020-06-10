@@ -82,7 +82,7 @@ public class BookmarkRestController {
 		sentenceService.delete(din);//전체 센텐스에서도 삭제
 	}
 	
-	@PostMapping("/bookmark/pass") //외웠어요 버튼 누르면 자기 북마크에서만 안보이고 전체리스트에는 남아있는 기능-작성자의 삭제권한 없어짐
+	@PostMapping("/bookmark/pass") //외웠어요 버튼 누르면 자기 북마크에서만 안보이고 전체리스트에는 남아있는 기능-원작성자의 삭제권한 없어짐
 	public void pass(@RequestBody HashMap<String,Object> param,HttpSession session) {
 		System.out.println(param);
 		
@@ -92,7 +92,7 @@ public class BookmarkRestController {
 		
 		int pin=memberService.findPin(authInfo.getId()); 
 		
-		service.deleteOne(pin,din); //자기 북마크에서만 삭제 
+		service.pass(pin,din); //자기 북마크에서만 삭제 
 	}
 	
 	

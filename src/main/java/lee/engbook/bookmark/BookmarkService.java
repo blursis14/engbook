@@ -47,7 +47,7 @@ public class BookmarkService {
 		
 	}
 	
-	public void deleteAll(int din) {
+	public void deleteAll(int din) { //원작성자가 삭제한 북마크를 db에서 모두 삭제->다른회원들이 삭제된 북마크를 불러오는 것을 방지 
 		
 		List<Bookmark> bookmarks=new ArrayList<>(); 
 		
@@ -55,14 +55,16 @@ public class BookmarkService {
 		
 		for(Bookmark b :bookmarks) {
 			repo.delete(b);
-		}//원작성자가 삭제한 북마크를 db에서 모두 삭제->다른회원들이 삭제된 북마크를 불러오는 것을 방지 
+		}
 		
 		
 	}
-	public void deleteOne(int pin,int din) { //해당회원의 북마크에서만 삭제
-		Bookmark bookmark=repo.findByPinAndDin(pin,din); //어떤북마크삭제할건지 알아내고
+	public void pass(int pin,int din) { //외웠어요 버튼 누르면 북마크에서 삭제
+		List<Bookmark> bookmarks=repo.findByPinAndDin(pin,din); //어떤북마크삭제할건지 알아내고
 		
-		repo.delete(bookmark); //삭제
+		for(Bookmark bookmark:bookmarks) { //하나의 폴더에 여러개추가했을 수도 있으니까 pin과 din 해당하는거 리스트로 받아서 전부 삭제
+			repo.delete(bookmark); 
+		}
 		
 	}
 	

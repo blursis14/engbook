@@ -100,9 +100,8 @@
 
 	
 	
-	
-	
 	var dinAndFolder = {} //북마크 추가할 때 필요한-센텐스의 din이랑 선택한 folder
+	
 	
 //북마크추가1-추가버튼눌러서 모달뜰 때, 북마크의 din저장해놓기
 	$(document).on(
@@ -110,6 +109,7 @@
 			'.addBookmark',
 			function(e) {
 
+				
 				//북마크추가 버튼 클릭하면 din을 세팅해놓음  
 				dinAndFolder["din"] = parseInt($(this).attr('value'), 10);
 
@@ -142,6 +142,9 @@
 
 			})
 
+			
+			
+	
 	//북마크추가2-모달에서 폴더선택하면 folder저장후 서버에 등록
 	$(function() {
 		$("#bookmark-folder").submit(
@@ -150,6 +153,7 @@
 					dinAndFolder["folder"] = $(
 							"#bookmark-folder-select option:selected").val(); //선택한 폴더 이름을 변수에 저장
 
+				
 					//alert(JSON.stringify(dinAndFolder));
 
 					$.ajax({
@@ -160,12 +164,18 @@
 						contentType : "application/json;charset=UTF-8",
 						success : function(data) {
 							alert('북마크를 추가했습니다.');
+							
+
 						},
 						error : function(e) {
 							alert('실패');
 						}
 					})
-				})
+					$("#addBookmarkModal").modal('hide');
+					return false; //추가한뒤에 자동새로고침 안하도록
+					}
+				
+		)
 	})
 	
 	
@@ -187,11 +197,13 @@
 			function() {
 				if ($(window).scrollTop() + 1 >= $(document).height()
 						- $(window).height()) {
-					param.page++;//스크롤바 바닥에 닿을 때 마다 센텐스 두 개 씩 더 가져옴 
+					param.page++;//스크롤바 바닥에 닿을 때 마다 센텐스 몇개씩 더 가져옴 
 					fireListAjax();
 				}
+				
 			});
 
+	
 	
 
 	function fireListAjax() {
@@ -263,11 +275,12 @@
 <body>
 		<div class="container-fluid center-block" style="width: 1000px; padding: 15px;" id="whole">
 				<div class="row">
+						<div class="center-block container-fluid">
 						<form id="search" name="search" class="form-inline">
 								<!-- inline여야 간격이 없이 메뉴처럼 나온다. ml-atuo : 우측으로 붙게하기-->
 								<input class="form-control mr-sm-2 " type="text" placeholder="단어 검색" name="search-tag" id="search-tag" />
 								<button class="btn btn-success" id="btn" type="submit">검색</button>
-						</form>
+						
 						<c:if test="${!empty authInfo }">
 								<!-- 로그인해야 sentence를 추가할 수 있게함 -->
 								<a class="btn btn-outline-info ml-2" role="button" id="addSentence" data-toggle="modal" data-target="#addSentenceModal">추가</a>
@@ -275,6 +288,8 @@
 						<c:if test="${empty authInfo }">
 								<a class="btn btn-outline-info ml-2" href="needLogin" role="button">추가</a>
 						</c:if>
+						</form>
+						</div>
 						
 						<!-- sentence추가 모달 영역 -->
 						<div class="modal fade" id="addSentenceModal" tabindex="-1" role="dialog">
