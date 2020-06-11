@@ -2,22 +2,26 @@ package lee.engbook.sentence;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.*;
 
 import lombok.Data;
+
+import org.apache.lucene.analysis.ko.KoreanFilterFactory;
+import org.apache.lucene.analysis.ko.KoreanTokenizerFactory;
+
+
+
+
 
 @Entity
 @Data
 @Table(name="sentence")
 @Indexed
+@AnalyzerDef(name = "koreanAnalyzer"
+, tokenizer = @TokenizerDef(factory = KoreanTokenizerFactory.class)
+, filters = { @TokenFilterDef(factory = KoreanFilterFactory.class)})
 public class Sentence {
 	
 	@Id
@@ -31,10 +35,12 @@ public class Sentence {
 	@Field
 	private String sentence;
 	
-	
+	@Field
+	@Analyzer(definition="koreanAnalyzer")
 	private String mean;
 	
-	
+	@Field
+	@Analyzer(definition="koreanAnalyzer")
 	private String memo;
 	
 	@Column(nullable=false,name="regdate")
@@ -43,3 +49,16 @@ public class Sentence {
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

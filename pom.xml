@@ -115,7 +115,8 @@
     <artifactId>hibernate-search-orm</artifactId>
     <version>5.11.1.Final</version>
 </dependency>
- 
+
+
 
 	</dependencies>
 
