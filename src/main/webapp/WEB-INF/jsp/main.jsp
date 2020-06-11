@@ -218,6 +218,7 @@
 
 						$.each(data,
 										function(key, value) {
+							if(value.memo){ //메모 있으면 메모칸 보임 
 											var $ul = $(
 													'<ul class="list-group mb-3">')
 													.append(
@@ -261,6 +262,47 @@
 
 											// 부모 엘리먼트에 append
 											$('#cardList').append($ul);
+							}
+							else{ //메모 없으면 메모칸 숨김
+								var $ul = $(
+		                          '<ul class="list-group mb-3">')
+		                          .append(
+		                              $(
+		                                  '<li class="list-group-item">')
+		                                  .text(
+		                                      value.sentence))
+		                          .append(
+		                              $(
+		                                  '<li class="list-group-item">')
+		                                  .text(
+		                                      value.mean))
+		                          .append(
+		                              $(
+		                                  '<li class="list-group-item">')
+		                                  .text(
+		                                      value.regDate))
+		                          .append(
+		                              $(
+		                                  '<ul class="list-group list-group-horizontal">')
+		                                  .append(
+		                                      $(
+		                                          '<div class="ml-auto row mr-1">')
+		                                          .append(
+		                                              $(
+		                                                  '<div class="addBookmark">')
+		                                                  .attr(
+		                                                      'value',
+		                                                      value.din)
+		                                                  //din을 알아야 추가하니까 value속성추가
+		                                                  .append(
+		                                                      $(
+		                                                          '<button class="list-group-item list-group-item-primary">')
+		                                                          .text(
+		                                                              '북마크에 추가')))));
+
+		                      // 부모 엘리먼트에 append
+		                      $('#cardList').append($ul);
+							}
 										})
 
 					},

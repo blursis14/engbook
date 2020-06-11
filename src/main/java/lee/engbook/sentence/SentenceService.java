@@ -74,8 +74,8 @@ public class SentenceService {
 		FullTextEntityManager fullTextEntityManager=Search.getFullTextEntityManager(entityManager);
 		QueryBuilder queryBuilder =fullTextEntityManager.getSearchFactory()
 				.buildQueryBuilder().forEntity(Sentence.class).get();
-		Query query=queryBuilder.keyword().wildcard().onField("sentence")
-				.matching("*"+"double"+"*").createQuery();
+		Query query=queryBuilder.phrase().withSlop(5).onField("sentence")
+				.sentence("amazing sort double").createQuery();
 		FullTextQuery fullTextQuery=fullTextEntityManager.createFullTextQuery(query, Sentence.class);
 		System.out.println(fullTextQuery.getResultList());
 	}
