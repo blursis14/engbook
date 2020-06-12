@@ -24,6 +24,9 @@ import org.apache.lucene.analysis.ko.KoreanTokenizerFactory;
 , filters = { @TokenFilterDef(factory = KoreanFilterFactory.class)})
 public class Sentence {
 	
+	@GeneratedValue
+	private int id;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int din;

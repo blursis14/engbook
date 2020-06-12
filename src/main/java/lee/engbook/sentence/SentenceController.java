@@ -47,6 +47,12 @@ public class SentenceController {
 		Sentence newSentence=service.add(pin,sentenceForm.getSentence(), sentenceForm.getMean(),sentenceForm.getMemo());
 		 
 		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+(전체)센텐스DB에 등록
+		
+		try {
+			service.buildIndex();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
 	public void delete(@PathVariable int din) {
