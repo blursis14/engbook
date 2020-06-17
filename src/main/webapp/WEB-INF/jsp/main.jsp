@@ -291,8 +291,7 @@
 		<div class="container-fluid center-block" style="width: 1000px; padding: 15px;" id="whole">
 				<div class="row">
 						<div class="center-block container-fluid">
-						<form id="search" name="search" class="form-inline" action="search">
-								<!-- inline여야 간격이 없이 메뉴처럼 나온다. ml-atuo : 우측으로 붙게하기-->
+						<form id="search" name="search" class="form-inline" action="search" method="get">
 								<input class="form-control mr-sm-2 " type="text" placeholder="검색" name="search-word" id="search-word" />
 								<button class="btn btn-success" id="btn" type="submit" >검색</button>
 						

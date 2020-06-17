@@ -4,8 +4,8 @@ package lee.engbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import lee.engbook.member.MemberService;
@@ -43,8 +43,10 @@ public class HelloController {
 	}
 	
 	@RequestMapping("/search")
-	public ModelAndView search(@PathVariable(value="search-word",required=false) String str) {
+	public ModelAndView search(@RequestParam(value="search-word",required=false)String str) {
 		ModelAndView mav=new ModelAndView();
+		
+		System.out.println(str);
 		
 		try {
 			sentenceService.buildIndex();
@@ -52,7 +54,7 @@ public class HelloController {
 			e.printStackTrace();
 		}
 		
-		mav.addObject("sentences", sentenceService.search(str));
+		mav.addObject("sentence", sentenceService.search(str));
 		
 		mav.setViewName("search");
 		return mav;

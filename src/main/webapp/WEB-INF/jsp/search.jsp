@@ -152,7 +152,7 @@ $(function() {
     <div class="container-fluid center-block" style="width: 1000px; padding: 15px;" id="whole">
         <div class="row">
             <div class="center-block container-fluid">
-            <form id="search" name="search" class="form-inline">
+            <form id="search" name="search" class="form-inline" action="search" method="get">
                 <!-- inline여야 간격이 없이 메뉴처럼 나온다. ml-atuo : 우측으로 붙게하기-->
                 <input class="form-control mr-sm-2 " type="text" placeholder="검색" name="search-word" id="search-word" />
                 <button class="btn btn-success" id="btn" type="submit">검색</button>
@@ -231,7 +231,27 @@ $(function() {
             </div>
             <div class="container-fluid center-block" style="width: 1000px; padding: 15px;">
                 <div class="row">
-                    <div class="col-sm" id="cardList"></div>
+                    <div class="col-sm" id="cardList">
+                    
+                    <c:forEach var="sentence" items="${sentence }">
+                    <ul class="list-group mb-3">
+                    <li class="list-group-item">${sentence.sentence }</li>
+                    <li class="list-group-item">${sentence.mean }</li>
+                    <c:if test="${!empty sentence.memo }">
+                    <li class="list-group-item">${sentence.memo }</li>
+                    </c:if>
+                    <li class="list-group-item">${sentence.regDate }</li>
+                    <ul class="list-group list-group-horizontal">
+                      <div class="ml-auto row mr-1">
+                        <div class="addBookmark" value=${sentence.din }>
+                          <button class="list-group-item list-group-item-primary">북마크에 추가</button>
+                         </div>
+                        </div>
+                    </ul>
+                    </ul>
+                    </c:forEach>
+                    
+                    </div>
                 </div>
             </div>
             </div></div>

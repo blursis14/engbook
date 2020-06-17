@@ -72,10 +72,7 @@ public class SentenceService {
 	@SuppressWarnings("unckecked")
 	public List<Sentence> search(String str) {
 
-		if(str==null) {
-			str="double it";
-		}
-		System.out.println(str);
+		//System.out.println(str);
 		FullTextEntityManager fullTextEntityManager=Search.getFullTextEntityManager(entityManager);
 		QueryBuilder queryBuilder =fullTextEntityManager.getSearchFactory()
 				.buildQueryBuilder().forEntity(Sentence.class).get();
