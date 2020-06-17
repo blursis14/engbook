@@ -70,25 +70,33 @@ public class SentenceService {
 		
 	}
 	@SuppressWarnings("unckecked")
-	public void search() {
-		String str="there double it";
-		
+	public List<Sentence> search(String str) {
+
+		if(str==null) {
+			str="double it";
+		}
+		System.out.println(str);
 		FullTextEntityManager fullTextEntityManager=Search.getFullTextEntityManager(entityManager);
 		QueryBuilder queryBuilder =fullTextEntityManager.getSearchFactory()
 				.buildQueryBuilder().forEntity(Sentence.class).get();
 		
-		if(str.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) { //한글검색시 sentence의 mean필드에서 검색함 
-		Query query=queryBuilder.phrase().withSlop(5).onField("mean")
+		if(str.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) { //한글검색시 sentence의 mean필드에서 검색 
+		Query query=queryBuilder.phrase().withSlop(5).onField("mean") 
 				.sentence(str).createQuery();
 		FullTextQuery fullTextQuery=fullTextEntityManager.createFullTextQuery(query, Sentence.class);
 		System.out.println(fullTextQuery.getResultList());
+		return (List<Sentence>)fullTextQuery.getResultList();
 		}
-		else {                                 //영어검색시 sentence의 sentence필드에서 검색함
+		else {                                 //영어검색시 sentence의 sentence필드에서 검색
 			Query query=queryBuilder.phrase().withSlop(5).onField("sentence")
 					.sentence(str).createQuery();
 			FullTextQuery fullTextQuery=fullTextEntityManager.createFullTextQuery(query, Sentence.class);
-			System.out.println(fullTextQuery.getResultList());
+			
+		    System.out.println(fullTextQuery.getResultList());
+		    return (List<Sentence>)fullTextQuery.getResultList();
+			
 		}
+		  
 	}
 }
 

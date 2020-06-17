@@ -1,22 +1,24 @@
 package lee.engbook;
 
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import lee.engbook.member.Member;
 import lee.engbook.member.MemberService;
+import lee.engbook.sentence.SentenceService;
 
 @Controller
 public class HelloController {
 
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	SentenceService sentenceService;
 	
 	@RequestMapping("/hello")
 	public String index(Model model) {
@@ -40,6 +42,21 @@ public class HelloController {
 		return "loginForm";
 	}
 	
+	@RequestMapping("/search")
+	public ModelAndView search(@PathVariable(value="search-word",required=false) String str) {
+		ModelAndView mav=new ModelAndView();
+		
+		try {
+			sentenceService.buildIndex();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		mav.addObject("sentences", sentenceService.search(str));
+		
+		mav.setViewName("search");
+		return mav;
+	}
 	
 	
 }

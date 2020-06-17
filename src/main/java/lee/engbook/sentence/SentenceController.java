@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,11 +49,7 @@ public class SentenceController {
 		 
 		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+(전체)센텐스DB에 등록
 		
-		try {
-			service.buildIndex();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
 	public void delete(@PathVariable int din) {
@@ -76,12 +73,7 @@ public class SentenceController {
 		
 		List<Sentence> sentences= service.findSentenceByPageable(page,size);//페이징해서 목록 보냄 
 		
-		try {
-			service.buildIndex();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		service.search();
+		
 	
 		return sentences;
 	}

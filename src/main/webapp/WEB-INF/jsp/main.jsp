@@ -9,34 +9,7 @@
 <jsp:include page="top.jsp" flush="false" />
 <script type="text/javascript">
 	
-	//검색 에이젝스 테스트
-	$(function() {
-		$("#search").submit(function(event) {
-			event.preventDefault();
-			fire_ajax_submit();
-		});
-	});
-
-	function fire_ajax_submit() {
-
-		var search = $("form[name=search]").serialize();
-
-		$.ajax({
-			type : "POST",
-			url : "/tsearch",
-			dataType : 'json',
-			data : search,
-			success : function(data) {
-				$('#tagList').html(data[0].sentence);
-
-			},
-			error : function(e) {
-				var json = e.responseText;
-				$('#tagList').html(json);
-			}
-		});
-	}
-
+	
 	//추가버튼눌렀을때 폴더목록 가져오는거
 	$(function() {
 		$("#addSentence").click(
@@ -318,10 +291,10 @@
 		<div class="container-fluid center-block" style="width: 1000px; padding: 15px;" id="whole">
 				<div class="row">
 						<div class="center-block container-fluid">
-						<form id="search" name="search" class="form-inline">
+						<form id="search" name="search" class="form-inline" action="search">
 								<!-- inline여야 간격이 없이 메뉴처럼 나온다. ml-atuo : 우측으로 붙게하기-->
-								<input class="form-control mr-sm-2 " type="text" placeholder="단어 검색" name="search-tag" id="search-tag" />
-								<button class="btn btn-success" id="btn" type="submit">검색</button>
+								<input class="form-control mr-sm-2 " type="text" placeholder="검색" name="search-word" id="search-word" />
+								<button class="btn btn-success" id="btn" type="submit" >검색</button>
 						
 						<c:if test="${!empty authInfo }">
 								<!-- 로그인해야 sentence를 추가할 수 있게함 -->
