@@ -2,14 +2,25 @@ package lee.engbook.sentence;
 
 import java.sql.Timestamp;
 
-import javax.persistence.*;
-
-import org.hibernate.search.annotations.*;
-
-import lombok.Data;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.apache.lucene.analysis.ko.KoreanFilterFactory;
 import org.apache.lucene.analysis.ko.KoreanTokenizerFactory;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.TokenizerDef;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.Data;
 
 
 
@@ -43,10 +54,10 @@ public class Sentence {
 	private String mean;
 	
 	@Field
-	@Analyzer(definition="koreanAnalyzer")
 	private String memo;
 	
 	@Column(nullable=false,name="regdate")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp regDate;
 	
 	

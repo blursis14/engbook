@@ -191,6 +191,7 @@
 
 						$.each(data,
 										function(key, value) {
+								
 							if(value.memo){ //메모 있으면 메모칸 보임 
 											var $ul = $(
 													'<ul class="list-group mb-3">')

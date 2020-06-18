@@ -1,6 +1,8 @@
 package lee.engbook.sentence;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,8 +33,15 @@ public class SentenceService {
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 	
-	public List getList() {
-		return (List)repo.findAll();
+	public List<Sentence> getList() {
+		List<Sentence> sentences=(List)repo.findAll();
+		
+		/*for(Sentence sentence:sentences) {
+		Date date=new Date(sentence.getRegDate().getTime());	
+		}*/
+		
+		return sentences;
+		
 	}
 	
 	public Sentence add(int pin,String p_sentence,String mean,String memo) {
