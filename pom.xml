@@ -117,17 +117,7 @@
     <version>5.11.1.Final</version>
 </dependency>
 
-<dependency>
-<groupId>arirang</groupId><artifactId>arirang</artifactId>
-<version>6.1.1</version>
-<scope>system</scope>
-<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/arirang.lucene-analyzer-6.1-1.0.0.jar</systemPath></dependency>
 
-<dependency>
-<groupId>arirang</groupId><artifactId>arirang</artifactId>
-<version>1.0.3</version>
-<scope>system</scope>
-<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/arirang-morph-1.0.3.jar</systemPath></dependency>
 
 
 
