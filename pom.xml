@@ -121,6 +121,8 @@
   <groupId>com.argo</groupId>
   <artifactId>arirang-morph</artifactId>
   <version>1.0.3</version>
+  <scope>system</scope>
+  <systemPath>${project.basedir}/src/main/resources/lib/arirang-morph-1.0.3.jar</systemPath>
   </dependency>
 
 
@@ -128,6 +130,8 @@
     <groupId>arirang</groupId>
     <artifactId>lucene-analyzer</artifactId>
     <version>6.1-1.0.0</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/src/main/resources/lib/arirang.lucene-analyzer-6.1-1.0.0.jar</systemPath>
    </dependency>
 
 
