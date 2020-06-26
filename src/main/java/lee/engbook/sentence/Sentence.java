@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 
-
-
-
 @Entity
 @Data
 @Table(name="sentence")
