@@ -9,8 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.apache.lucene.analysis.ko.KoreanFilterFactory;
-import org.apache.lucene.analysis.ko.KoreanTokenizerFactory;
+import lee.engbook.lucene.*;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.Field;
