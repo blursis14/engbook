@@ -1,9 +1,0 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Tue Jun 23 20:58:06 KST 2020
-FastInfoset-1.2.16-sources.jar>central=
-FastInfoset-1.2.16-javadoc.jar>central=
-FastInfoset-1.2.16-javadoc.jar>=
-FastInfoset-1.2.16.jar>=
-FastInfoset-1.2.16.jar>central=
-FastInfoset-1.2.16.pom>central=
-FastInfoset-1.2.16-sources.jar>=
