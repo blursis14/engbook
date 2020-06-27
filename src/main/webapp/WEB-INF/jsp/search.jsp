@@ -80,7 +80,7 @@ $(document).on(
 
       if (document.getElementById('login')) { //top.jsp의 코드에서 지금 보이는 게 로그인버튼인지, 로그아웃 버튼인지 알 수 있다. 이에 따라 북마크를 추가하거나 로그인을 요구할 수 있음
         alert('로그인이 필요한 서비스입니다.');
-        window.location.replace("http://ec2-3-34-59-204.ap-northeast-2.compute.amazonaws.com/login"); //로그인 안했으면 로그인페이지로 이동
+        window.location.replace("http://ec2-3-34-59-204.ap-northeast-2.compute.amazonaws.com:8081/login"); //로그인 안했으면 로그인페이지로 이동
       }
       if (document.getElementById('logout')) { //로그인 되어있으면 폴더불러오고,폴더 선택하는 모달 보이기 
         $("#addBookmarkModal").modal('show');
