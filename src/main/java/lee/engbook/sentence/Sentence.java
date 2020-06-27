@@ -43,7 +43,6 @@ public class Sentence {
 	private String sentence;
 	
 	@Field
-	@Analyzer(definition="koreanAnalyzer")
 	private String mean;
 	
 	@Field
