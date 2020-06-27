@@ -1,0 +1,9 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Jun 23 20:58:06 KST 2020
+json-path-2.4.0.jar>central=
+json-path-2.4.0-sources.jar>=
+json-path-2.4.0.pom>central=
+json-path-2.4.0.jar>=
+json-path-2.4.0-javadoc.jar>=
+json-path-2.4.0-sources.jar>central=
+json-path-2.4.0-javadoc.jar>central=
