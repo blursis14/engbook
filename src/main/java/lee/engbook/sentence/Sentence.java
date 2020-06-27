@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lee.engbook.lucene.*;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.Field;
@@ -26,9 +25,7 @@ import lombok.Data;
 @Data
 @Table(name="sentence")
 @Indexed
-@AnalyzerDef(name = "koreanAnalyzer"
-, tokenizer = @TokenizerDef(factory = KoreanTokenizerFactory.class)
-, filters = { @TokenFilterDef(factory = KoreanFilterFactory.class)})
+
 public class Sentence {
 	
 	@GeneratedValue
