@@ -9,27 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.TokenFilterDef;
-import org.hibernate.search.annotations.TokenizerDef;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
-
 
 @Entity
 @Data
 @Table(name="sentence")
 @Indexed
-
 public class Sentence {
-	
-	@GeneratedValue
-	private int id;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -42,29 +31,15 @@ public class Sentence {
 	@Field
 	private String sentence;
 	
-	@Field
+	
 	private String mean;
 	
-	@Field
+	
 	private String memo;
 	
 	@Column(nullable=false,name="regdate")
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp regDate;
 	
 	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -82,27 +82,3 @@ public class SentenceController {
 	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

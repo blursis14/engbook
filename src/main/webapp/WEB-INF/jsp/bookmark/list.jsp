@@ -58,27 +58,17 @@
 															$(
 																	'<li class="list-group-item">')
 																	.text(
-																			value.mean));
-											if(value.memo){ //메모 있으면 보이기
-												  $ul.append(
-							                              $(
-							                                  '<li class="list-group-item">')
-							                                  .text(
-							                                      value.memo))
-							                          .append(
-							                              $(
-							                                  '<li class="list-group-item">')
-							                                  .text(
-							                                      value.regDate));
-											}else{ //메모없을경우 
-												$ul.append(
-							                              $(
-							                                  '<li class="list-group-item">')
-							                                  .text(
-							                                      value.regDate));
-											}
-													
-													
+																			value.mean))
+													.append(
+															$(
+																	'<li class="list-group-item">')
+																	.text(
+																			value.memo))
+													.append(
+															$(
+																	'<li class="list-group-item">')
+																	.text(
+																			value.regDate));
 											
 											if (value.pin == pin) { //센텐스 작성자인지, 단순 북마크 추가자인지 비교 후 작성자면 삭제&외웠어요 버튼, 추가자면 외웠어요버튼만 보이기
 

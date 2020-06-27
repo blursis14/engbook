@@ -1,8 +1,6 @@
 package lee.engbook.sentence;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,15 +31,8 @@ public class SentenceService {
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 	
-	public List<Sentence> getList() {
-		List<Sentence> sentences=(List)repo.findAll();
-		
-		/*for(Sentence sentence:sentences) {
-		Date date=new Date(sentence.getRegDate().getTime());	
-		}*/
-		
-		return sentences;
-		
+	public List getList() {
+		return (List)repo.findAll();
 	}
 	
 	public Sentence add(int pin,String p_sentence,String mean,String memo) {
@@ -78,15 +69,14 @@ public class SentenceService {
 			fullTextEntityManager.createIndexer().startAndWait();
 		
 	}
-	@SuppressWarnings("unckecked")
+	
 	public List<Sentence> search(String str) {
 
-		//System.out.println(str);
 		FullTextEntityManager fullTextEntityManager=Search.getFullTextEntityManager(entityManager);
 		QueryBuilder queryBuilder =fullTextEntityManager.getSearchFactory()
 				.buildQueryBuilder().forEntity(Sentence.class).get();
 		
-		                                 //영어검색시 sentence의 sentence필드에서 검색
+		                                 //sentence의 sentence필드에서 검색
 			Query query=queryBuilder.phrase().withSlop(5).onField("sentence")
 					.sentence(str).createQuery();
 			FullTextQuery fullTextQuery=fullTextEntityManager.createFullTextQuery(query, Sentence.class);
