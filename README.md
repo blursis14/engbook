@@ -9,7 +9,7 @@ ENGBOOK은 영어 문장 암기에 도움을 주는 웹어플리케이션입니�
 삭제버튼을 클릭하면 문장이 아예 삭제되고, 외웠어요 버튼을 클릭하면 그것이 자신의 북마크에서만 사라지고, 
 다른사람은 여전히 볼 수 있습니다. 
 
-사이트 주소는 http://ec2-3-34-59-204.ap-northeast-2.compute.amazonaws.com/main 입니다.
+사이트 주소는http://ec2-3-34-59-204.ap-northeast-2.compute.amazonaws.com/main 입니다.
 
 개발과정 
 
