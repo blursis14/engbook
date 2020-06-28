@@ -47,69 +47,33 @@
 										data,
 										function(key, value) {
 
-											var $ul = $(
-													'<ul class="list-group mb-3">')
-													.append(
-															$(
-																	'<li class="list-group-item">')
-																	.text(
-																			value.sentence))
-													.append(
-															$(
-																	'<li class="list-group-item">')
-																	.text(
-																			value.mean))
-													.append(
-															$(
-																	'<li class="list-group-item">')
-																	.text(
-																			value.memo))
-													.append(
-															$(
-																	'<li class="list-group-item">')
-																	.text(
-																			value.regDate));
-											
-											if (value.pin == pin) { //센텐스 작성자인지, 단순 북마크 추가자인지 비교 후 작성자면 삭제&외웠어요 버튼, 추가자면 외웠어요버튼만 보이기
+											if(value.memo){ 
+												var $ul = $(
+						                          '<ul class="list-group mb-3">')
+						                          .append(
+						                              $(
+						                                  '<li class="list-group-item">')
+						                                  .text(
+						                                      value.sentence))
+						                          .append(
+						                              $(
+						                                  '<li class="list-group-item">')
+						                                  .text(
+						                                      value.mean))
+						                          .append(
+						                              $(
+						                                  '<li class="list-group-item">')
+						                                  .text(
+						                                      value.memo))
+						                          .append(
+						                              $(
+						                                  '<li class="list-group-item">')
+						                                  .text(
+						                                      value.regDate));
+						                      
+						                      if (value.pin == pin) { //센텐스 작성자인지, 단순 북마크 추가자인지 비교 후 작성자면 삭제&외웠어요 버튼, 추가자면 외웠어요버튼만 보이기
 
-												$ul
-														.append($(
-																'<li class="list-group-item">')
-																.append(
-																		$(
-																				'<div class="row">')
-																				.append(
-																						$(
-																								'<div class="col-md-8">')
-																								.append(
-																										$(
-																												'<div class="ml-auto row mr-2">')
-																												.append(
-																														$(
-																																'<div class="delete">')
-																																.attr(
-																																		'value',
-																																		value.din)
-																																.append(
-																																		$(
-																																				'<a class="btn btn-outline-info mr-1" role="button">')
-																																				.text(
-																																						'삭제')))
-																												.append(
-																														$(
-																																'<div class="pass">')
-																																.attr(
-																																		'value',
-																																		value.din)
-																																.append(
-																																		$(
-																																				'<a class="btn btn-outline-info mr-1" role="button">')
-																																				.text(
-																																						'외웠어요')))
-																																						))));
-
-											}else{
-												  $ul
+						                        $ul
 						                            .append($(
 						                                '<li class="list-group-item">')
 						                                .append(
@@ -123,6 +87,17 @@
 						                                                        '<div class="ml-auto row mr-2">')
 						                                                        .append(
 						                                                            $(
+						                                                                '<div class="delete">')
+						                                                                .attr(
+						                                                                    'value',
+						                                                                    value.din)
+						                                                                .append(
+						                                                                    $(
+						                                                                        '<a class="btn btn-outline-info mr-1" role="button">')
+						                                                                        .text(
+						                                                                            '삭제')))
+						                                                        .append(
+						                                                            $(
 						                                                                '<div class="pass">')
 						                                                                .attr(
 						                                                                    'value',
@@ -132,8 +107,122 @@
 						                                                                        '<a class="btn btn-outline-info mr-1" role="button">')
 						                                                                        .text(
 						                                                                            '외웠어요')))
-						                                                ))));
+						                                                                            ))));
+
+						                      }else{
+						                          $ul
+						                                        .append($(
+						                                            '<li class="list-group-item">')
+						                                            .append(
+						                                                $(
+						                                                    '<div class="row">')
+						                                                    .append(
+						                                                        $(
+						                                                            '<div class="col-md-8">')
+						                                                            .append(
+						                                                                $(
+						                                                                    '<div class="ml-auto row mr-2">')
+						                                                                    .append(
+						                                                                        $(
+						                                                                            '<div class="pass">')
+						                                                                            .attr(
+						                                                                                'value',
+						                                                                                value.din)
+						                                                                            .append(
+						                                                                                $(
+						                                                                                    '<a class="btn btn-outline-info mr-1" role="button">')
+						                                                                                    .text(
+						                                                                                        '외웠어요')))
+						                                                            ))));
+						                      }
+						                      
+											} else{ //메모없으면 칸 숨김
+												var $ul = $(
+						                          '<ul class="list-group mb-3">')
+						                          .append(
+						                              $(
+						                                  '<li class="list-group-item">')
+						                                  .text(
+						                                      value.sentence))
+						                          .append(
+						                              $(
+						                                  '<li class="list-group-item">')
+						                                  .text(
+						                                      value.mean))
+						                          .append(
+						                              $(
+						                                  '<li class="list-group-item">')
+						                                  .text(
+						                                      value.regDate));
+						                      
+						                      if (value.pin == pin) { //센텐스 작성자인지, 단순 북마크 추가자인지 비교 후 작성자면 삭제&외웠어요 버튼, 추가자면 외웠어요버튼만 보이기
+
+						                        $ul
+						                            .append($(
+						                                '<li class="list-group-item">')
+						                                .append(
+						                                    $(
+						                                        '<div class="row">')
+						                                        .append(
+						                                            $(
+						                                                '<div class="col-md-8">')
+						                                                .append(
+						                                                    $(
+						                                                        '<div class="ml-auto row mr-2">')
+						                                                        .append(
+						                                                            $(
+						                                                                '<div class="delete">')
+						                                                                .attr(
+						                                                                    'value',
+						                                                                    value.din)
+						                                                                .append(
+						                                                                    $(
+						                                                                        '<a class="btn btn-outline-info mr-1" role="button">')
+						                                                                        .text(
+						                                                                            '삭제')))
+						                                                        .append(
+						                                                            $(
+						                                                                '<div class="pass">')
+						                                                                .attr(
+						                                                                    'value',
+						                                                                    value.din)
+						                                                                .append(
+						                                                                    $(
+						                                                                        '<a class="btn btn-outline-info mr-1" role="button">')
+						                                                                        .text(
+						                                                                            '외웠어요')))
+						                                                                            ))));
+
+						                      }else{
+						                          $ul
+						                                        .append($(
+						                                            '<li class="list-group-item">')
+						                                            .append(
+						                                                $(
+						                                                    '<div class="row">')
+						                                                    .append(
+						                                                        $(
+						                                                            '<div class="col-md-8">')
+						                                                            .append(
+						                                                                $(
+						                                                                    '<div class="ml-auto row mr-2">')
+						                                                                    .append(
+						                                                                        $(
+						                                                                            '<div class="pass">')
+						                                                                            .attr(
+						                                                                                'value',
+						                                                                                value.din)
+						                                                                            .append(
+						                                                                                $(
+						                                                                                    '<a class="btn btn-outline-info mr-1" role="button">')
+						                                                                                    .text(
+						                                                                                        '외웠어요')))
+						                                                            ))));
+						                      }
+						                      
 											}
+											
+					
 											
 											
 

@@ -22,6 +22,10 @@ import lombok.Data;
 @Indexed
 public class Sentence {
 	
+	@GeneratedValue
+	private int id;
+	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int din;
