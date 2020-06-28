@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -31,13 +33,14 @@ public class Sentence {
 	@Field
 	private String sentence;
 	
-	
+	@Field
 	private String mean;
 	
 	
 	private String memo;
 	
 	@Column(nullable=false,name="regdate")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp regDate;
 	
 	

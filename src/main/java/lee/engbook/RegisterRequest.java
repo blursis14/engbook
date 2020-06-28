@@ -21,8 +21,8 @@ public class RegisterRequest {
 	private String email;
 	
 	@NotBlank(message="필수항목입니다.")
-	@Size(min=4,max=16,message="비밀번호는 4자 이상 16자 이하입니다.")
-	@Pattern(regexp="[a-zA-Z1-9]{6,12}", message = "비밀번호는 영어와 숫자를 포함해야 합니다.")
+	@Pattern(regexp="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&^])[A-Za-z\\d@$!%*#?&^]{8,}$",
+			message = "비밀번호는 문자,숫자,특수문자를 포함해 8자 이상이어야 합니다.")
 	private String password;
 	
 	@NotBlank(message="필수항목입니다.")
