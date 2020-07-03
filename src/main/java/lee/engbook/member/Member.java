@@ -33,6 +33,6 @@ public class Member {
 	private String email;
 	
 	@Column(nullable=false,name="regtype")
-	private String regType;//구글로그인인지,사이트자체회원인지 
+	private String regType;
 
 }
