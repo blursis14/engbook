@@ -39,8 +39,6 @@ public class RegisterController {
 			AuthInfo authInfo=authService.authenticate(regReq.getId(), regReq.getPassword());
 			session.setAttribute("authInfo", authInfo);
 			return "register/succeed";
-		}catch(DuplicateMemberException ex) {
-			return "register/form";
 		}catch(WrongIdPasswordException ex) { //비번일치x
 			model.addAttribute("isPasswordMatch","비밀번호가 일치하지 않습니다");
 			System.out.println("불일치");
