@@ -31,10 +31,7 @@ public class MemberService {
 	
 	public List regist(RegisterRequest regReq) {
 		Member member=repo.findById(regReq.getId());
-		if(member!=null) {
-			System.out.println("duplicateMember");
-			throw new DuplicateMemberException("duplicate id or email"+regReq.getId()+regReq.getEmail());
-		} //id랑 email은 커스텀 validator 만들었으니까 이건 빼도 될 듯 
+		
 		if(!regReq.isPasswordEqualToConfirmPassword()) {//비번불일치
 			throw new WrongIdPasswordException();
 		}
