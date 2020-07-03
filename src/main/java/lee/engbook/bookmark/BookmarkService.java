@@ -78,25 +78,6 @@ public class BookmarkService {
 	}
 	
 	
-	public List<Sentence> getListOfFolder(int pin,String folder) {//무한스크롤 구현했으면 이거 지워
-		List<Bookmark> bookmarkList=new ArrayList<>();
-		bookmarkList=repo.findByPinAndFolder(pin,folder); //북마크리스트 찾기
-		
-		System.out.println(bookmarkList);
-		List<Sentence> sentences=new ArrayList<>();
-		
-		
-		for(Bookmark bookmark:bookmarkList) {
-			//System.out.println(bookmark.getDin());
-			Sentence sentence=sentenceService.findByDin(bookmark.getDin());
-			sentence.setRegDate(bookmark.getRegDate()); 
-			//내가 등록한거면 등록일이 같겠지만, 남이 쓴 걸 북마크로 추가했을 때는 내가 추가한 날이 북마크의 등록일이 되는 것임
-			
-			sentences.add(sentence);
-		} //북마크의 din정보를 이용해 sentence리스트들을 만들기
-		
-		return sentences; 
-	}
 	
 	public List<Bookmark> getListOfBookmark(int pin,String folder){
 		return repo.findByPinAndFolder(pin,folder);
