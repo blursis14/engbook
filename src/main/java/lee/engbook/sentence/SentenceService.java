@@ -31,9 +31,7 @@ public class SentenceService {
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 	
-	public List getList() {
-		return (List)repo.findAll();
-	}
+	
 	
 	public Sentence add(int pin,String p_sentence,String mean,String memo) {
 		Sentence sentence=new Sentence();
@@ -46,20 +44,20 @@ public class SentenceService {
 		
 		return sentence; //sentence의 자동생성된 din값이, 다른 테이블에 값저장할 때 필요하므로 새로 저장된거 반환
 	}
-	public void delete(int din) {
-		Sentence sentence=repo.findByDin(din);
+	public void delete(int id) {
+		Sentence sentence=repo.findById(id);
 		repo.delete(sentence);
 		
 	}
-	public Sentence findByDin(int din) {
-		return repo.findByDin(din); 
+	public Sentence findById(int id) {
+		return repo.findById(id); 
 	}
 	public List findByPin(int pin) {
 		return (List)repo.findByPin(pin);
 	}
 	
 	public List<Sentence> findSentenceByPageable(int page,int size){
-		Pageable pageable=(Pageable) PageRequest.of(page, size,Sort.by("din").descending());//최신순정렬
+		Pageable pageable=(Pageable) PageRequest.of(page, size,Sort.by("id").descending());//최신순정렬
 		return (repo.findAll(pageable)).getContent();
 	}
 	

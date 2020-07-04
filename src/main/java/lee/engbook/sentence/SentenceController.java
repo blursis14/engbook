@@ -47,22 +47,13 @@ public class SentenceController {
 		
 		Sentence newSentence=service.add(pin,sentenceForm.getSentence(), sentenceForm.getMean(),sentenceForm.getMemo());
 		 
-		bookmarkService.add(pin, newSentence.getDin(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+(전체)센텐스DB에 등록
+		bookmarkService.add(pin, newSentence.getId(), sentenceForm.getFolder()); //사용자의 북마크DB에 등록+(전체)센텐스DB에 등록
 		
 		
 	}
-	@RequestMapping(value="/sdelete/{din}",method=RequestMethod.GET)
-	public void delete(@PathVariable int din) {
-		 service.delete(din);
-	}
-	@RequestMapping(value="/sfinddin/{din}",method=RequestMethod.GET)
-	public Sentence findDin(@PathVariable int din) {
-		return service.findByDin(din);
-	}
-	@RequestMapping(value="/sfindpin/{pin}",method=RequestMethod.GET)
-	public List findPin(@PathVariable int pin) {
-		return service.findByPin(pin);
-	}
+	
+	
+	
 	
 	@PostMapping("/list/sentence")
 	public List<Sentence> list(@RequestBody HashMap<String,Object> param){ //메인에 보이는 리스트

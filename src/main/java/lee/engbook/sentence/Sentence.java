@@ -22,13 +22,11 @@ import lombok.Data;
 @Indexed
 public class Sentence {
 	
-	@GeneratedValue
-	private int id;
-	
 	
 	@Id
+	@Column(name="din")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int din;
+	private int id;
 	
 	@Column(nullable=false)
 	private int pin;

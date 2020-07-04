@@ -48,7 +48,7 @@ public class BookmarkRestController {
 		for(Bookmark bookmark:bookmarks) {
 			
 			Sentence sentence=new Sentence();
-			sentence=sentenceService.findByDin(bookmark.getDin());//din으로 조회해서 센텐스 하나씩 받아오기
+			sentence=sentenceService.findById(bookmark.getDin());//센텐스의 din(id필드)칼럼으로 조회해서 센텐스 하나씩 받아오기
 			
 			sentences.add(sentence);
 		}
@@ -67,9 +67,9 @@ public class BookmarkRestController {
 		int pin=memberService.findPin(authInfo.getId()); //지금 로그인 한 회원의 pin 조회
 		System.out.println(pin);
 		
-		int din=(int)param.get("din"); //북마크에 추가할 센텐스의 문서번호인 din 추출
+		int id=(int)param.get("id"); //북마크에 추가할 센텐스의 문서번호인 id(din) 추출
 		String folder=(String)param.get("folder"); //북마크의 폴더 파라미터 추출
-		service.add(pin, din, folder); 
+		service.add(pin, id, folder); 
 	}
 	
 	@PostMapping("/bookmark/delete") //북마크db에서 삭제되고 전체리스트에서도 삭제되는 기능 -센텐스의 작성자에만 해당

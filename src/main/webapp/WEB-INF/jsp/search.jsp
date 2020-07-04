@@ -54,15 +54,15 @@ $(function() {
     }
   });
 });
-var dinAndFolder = {} //북마크 추가할 때 필요한-센텐스의 din이랑 선택한 folder
+var idAndFolder = {} //북마크 추가할 때 필요한-센텐스의 id이랑 선택한 folder
 //북마크추가1-추가버튼눌러서 모달뜰 때, 북마크의 din저장해놓기
 $(document).on(
     'click',
     '.addBookmark',
     function(e) {
       
-      //북마크추가 버튼 클릭하면 din을 세팅해놓음  
-      dinAndFolder["din"] = parseInt($(this).attr('value'), 10);
+      //북마크추가 버튼 클릭하면 id를 세팅해놓음  
+      idAndFolder["id"] = parseInt($(this).attr('value'), 10);
       if (document.getElementById('login')) { //top.jsp의 코드에서 지금 보이는 게 로그인버튼인지, 로그아웃 버튼인지 알 수 있다. 이에 따라 북마크를 추가하거나 로그인을 요구할 수 있음
         alert('로그인이 필요한 서비스입니다.');
         window.location.replace("http://ec2-3-34-59-204.ap-northeast-2.compute.amazonaws.com:8081/login"); //로그인 안했으면 로그인페이지로 이동
@@ -95,14 +95,14 @@ $(document).on(
 $(function() {
   $("#bookmark-folder").submit(
       function() {
-        dinAndFolder["folder"] = $(
+        idAndFolder["folder"] = $(
             "#bookmark-folder-select option:selected").val(); //선택한 폴더 이름을 변수에 저장
       
         //alert(JSON.stringify(dinAndFolder));
         $.ajax({
           type : "POST",
           url : "/bookmark/add",
-          data : JSON.stringify(dinAndFolder),
+          data : JSON.stringify(idAndFolder),
           async:false,
           contentType : "application/json;charset=UTF-8",
           success : function(data) {
@@ -217,7 +217,7 @@ $(function() {
                     <li class="list-group-item">${sentence.regDate }</li>
                     <ul class="list-group list-group-horizontal">
                       <div class="ml-auto row mr-1">
-                        <div class="addBookmark" value=${sentence.din }>
+                        <div class="addBookmark" value=${sentence.id }>
                           <button class="list-group-item list-group-item-primary">북마크에 추가</button>
                          </div>
                         </div>
