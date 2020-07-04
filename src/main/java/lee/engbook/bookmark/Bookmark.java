@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -29,6 +31,7 @@ public class Bookmark {
 	private String folder;
 	
 	@Column(nullable=false,name="REGDATE")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp regDate;
 	
 	
