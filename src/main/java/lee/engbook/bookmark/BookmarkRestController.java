@@ -35,7 +35,7 @@ public class BookmarkRestController {
 		int page=(int)param.get("page");
 		int size=(int)param.get("size");
 		String folder=(String)param.get("folder");//어떤 폴더에 있는 북마크 리스트인지 알아내기
-		System.out.println(param);
+		//System.out.println(param);
 		
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
 		int pin=memberService.findPin(authInfo.getId()); //지금 로그인 한 회원의 pin 조회
@@ -49,7 +49,9 @@ public class BookmarkRestController {
 			
 			Sentence sentence=new Sentence();
 			sentence=sentenceService.findById(bookmark.getDin());//센텐스의 din(id필드)칼럼으로 조회해서 센텐스 하나씩 받아오기
-			
+			System.out.println(bookmark.getRegDate());
+			sentence.setRegDate(bookmark.getRegDate());//센텐스의 regDate프로퍼티를 북마크를 '추가한 날'의 날짜로 세팅
+			//System.out.println(sentence);
 			sentences.add(sentence);
 		}
 		System.out.println(sentences);
@@ -65,7 +67,7 @@ public class BookmarkRestController {
 		
 		AuthInfo authInfo=(AuthInfo)session.getAttribute("authInfo");
 		int pin=memberService.findPin(authInfo.getId()); //지금 로그인 한 회원의 pin 조회
-		System.out.println(pin);
+		//System.out.println(pin);
 		
 		int id=(int)param.get("id"); //북마크에 추가할 센텐스의 문서번호인 id(din) 추출
 		String folder=(String)param.get("folder"); //북마크의 폴더 파라미터 추출
