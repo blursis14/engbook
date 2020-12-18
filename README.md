@@ -40,13 +40,9 @@ HTML5
 
 BOOTSTRAP
 
-REST API
-
 Hibernate search
 
-페이징 : 스크롤이 바닥에 닿을 때마다 새로운 데이터를 불러오는 방식
-
-배포 : AWS의 우분투 ec2를 rds와 연동
+AWS의 우분투 ec2를 rds와 연동하여 배포 (현재 종료상태입니다.캡쳐본을 참고 부탁드립니다.)
 
 형상관리 : github 데스크탑 어플리케이션
 
